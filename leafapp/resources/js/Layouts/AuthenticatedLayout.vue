@@ -2,9 +2,8 @@
 import Header from '@/Templates/Header.vue';
 import Footer from '@/Templates/Footer.vue';
 import NavLink from '@/Components/NavLink.vue';
-import { RouteLocationRaw } from 'vue-router'; // `vue-router`から型をインポート
 
-/**f
+/**
  * ルートインターフェースを定義する
  * @parmas title:タイトル
  * @parmas route:ルート定義
@@ -18,12 +17,10 @@ interface Route {
  * 説明://
  */
 const routes: Route[] = [
-    { title: "ダッシュボード", route: 'dashboard' },
+    { title: "ダッシュボード", route: 'dashboard.index'},
     { title: "マイ単語帳", route: 'mywords.index' },
     { title: "単語クイズ", route: 'mywords.index' },
-];
-
-
+]
 </script>
 
 <template>
