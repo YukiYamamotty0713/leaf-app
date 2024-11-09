@@ -8,3 +8,6 @@ import { footerData } from '@/Texts/common.js';
         </span>
     </footer>
 </template>
+<style scoped>
+    
+</style>
