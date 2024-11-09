@@ -1,6 +1,6 @@
 <script setup>
 import TitleText from '@/Atoms/TitleText.vue';
-import NavLink from '@/Components/NavLink.vue';
+
 import { Link } from '@inertiajs/vue3';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 
@@ -28,23 +28,6 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
                 </span>
             </div>
         </div>
-<!--ページ遷移 -->
-    <div class="flex flex-row">
-        <div class="bg-primary">
-            <nav-link :href="route('profile.destroy')">editer</nav-link>
-        </div>
-        <div class="bg-primary">
-            <nav-link :href="route('profile.destroy')">editer</nav-link>
-        </div>
-        <div class="bg-primary">
-            <nav-link :href="route('profile.destroy')">editer</nav-link>
-        </div>
-        <div class="bg-primary">
-            <nav-link :href="route('profile.destroy')">editer</nav-link>
-        </div>
-        <div class="bg-primary">
-            <nav-link :href="route('profile.destroy')">editer</nav-link>
-        </div>
-    </div>
+
     </header>
 </template>
