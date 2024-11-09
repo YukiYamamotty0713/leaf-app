@@ -28,9 +28,9 @@ function handleImageError() {
 
 <template>
     <Head title="Portal" />
-    <div class="flex flex-col justify-center items-center gap-y-4 my-10">
+    <div class="flex flex-col justify-center items-center gap-y-4 my-10 text-accent bg-primary">
         <application-logo></application-logo>
-        <Link :href="route('login')">LogIN</Link>
+        <Link :href="route('login')">log in</Link>
         <Link v-if="canRegister" :href="route('register')">Register</Link>
     </div>
 </template>

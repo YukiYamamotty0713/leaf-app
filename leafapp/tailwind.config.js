@@ -15,10 +15,21 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
-            colors: {
-                primary_color: '#B69F7E',     // 任意の色に変更
-                secondary_color: '#8C7A63',   // 任意の色に変更
-                accent_color: '#566A56',      // 必要に応じて他の色も追加可能
+            backgroundColor: {
+                primary: '#B69F7E',
+                secondary: '#8C7A63',
+                accent: '#566A56',
+                light: '#F5F5F5',
+                dark: '#2D2D2D',
+                muted: '#E5E5E5',
+            },
+            textColor: {
+                primary: '#2D2D2D',
+                secondary: '#4A4A4A',
+                accent: '#566A56',
+                light: '#FFFFFF',
+                dark: '#1A1A1A',
+                muted: '#6B6B6B',
             },
         },
     },

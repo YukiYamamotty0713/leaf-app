@@ -18,6 +18,10 @@ export default defineConfig({
         }),
     ],
     server: {
-        host: '0.0.0.0',
-      },
+        hmr: {
+            host: 'localhost'
+        },
+        // 必要に応じてポートを変更
+        port: 5174
+    },
 });

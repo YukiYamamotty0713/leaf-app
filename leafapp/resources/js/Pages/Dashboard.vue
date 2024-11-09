@@ -7,8 +7,13 @@ import PrimaryCard from '@/Atoms/PrimaryCard.vue';
 <template>
     <Head title="Dashboard" />
     <AuthenticatedLayout>
-        <primary-card>
-            これはDashBoardのテストです
-        </primary-card>
+            <primary-card>
+                <template #header>
+                    これはDashBoardのテストです
+                </template>
+                <span>
+                    実際にはここにスロットの内容が差し込まれます
+                </span>
+            </primary-card>
     </AuthenticatedLayout>
 </template>
