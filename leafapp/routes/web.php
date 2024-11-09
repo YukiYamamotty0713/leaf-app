@@ -23,7 +23,7 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
 
     Route::get('my-words', [MyWordsController::class, 'index'])->name('mywords.index');
-    Route::get('words-question', [WordsQuestionController::class, 'index'])->name('words-question.index'); //test
+    Route::get('words-question', [WordsQuestionController::class, 'index'])->name('words-question.index'); //tests
 });
 
 require __DIR__.'/auth.php';
