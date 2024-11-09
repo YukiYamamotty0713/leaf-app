@@ -1,11 +1,8 @@
 <?php
 namespace App\Providers;
-use App\Repositories\SampleRepositoryInterface;
-use App\Repositories\SampleRepository;
+
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
-use App\Repositories\TestRepositoryInterface;
-use App\Repositories\TestRepository;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -15,8 +12,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(SampleRepositoryInterface::class, SampleRepository::class);
-        $this->app->bind(TestRepositoryInterface::class, TestRepository::class);
+//        $this->app->bind(MockyRepositoryInterface::class, MockyRepository::class);
     }
 
     /**

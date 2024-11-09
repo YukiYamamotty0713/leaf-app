@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 class MakePage extends Command
 {
-    protected $signature = 'make:page {name} {--dir=User} {--title=Page Title}';  // Added --title option
+    protected $signature = 'make:page {name} {--dir=User} {--title}';  // Added --title option
     protected $description = 'Create a new page with authenticated layout in a specific directory';
 
     public function handle()
@@ -27,15 +27,24 @@ class MakePage extends Command
         }
 
         // Vue ファイルのテンプレート内容
-        $content = "<script setup>\n";
-        $content .= "import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';\n";
-        $content .= "import { Head, useForm } from '@inertiajs/vue3';\n";
-        $content .= "</script>\n\n";
-        $content .= "<template>\n";
-        $content .= "    <Head title=\"{$pageTitle}\" />\n";  // Use PageTitle here
-        $content .= "    <AuthenticatedLayout>\n";
-        $content .= "    </AuthenticatedLayout>\n";
-        $content .= "</template>\n";
+        $content = <<<EOF
+        <script setup>
+        import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+        import { Head, useForm } from '@inertiajs/vue3';
+        const props = defineProps({
+            data: String | Object | null
+        });
+        </script>
+
+        <template>
+            <Head title="{$pageTitle}"/>
+            <AuthenticatedLayout>
+                <div>
+                    Page:{{ data }}
+                </div>
+            </AuthenticatedLayout>
+        </template>
+        EOF;
 
         // 指定ディレクトリが存在しない場合は作成
         $dirPath = resource_path("js/Pages/{$dir}");

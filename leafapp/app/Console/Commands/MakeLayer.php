@@ -43,6 +43,13 @@ class MakeLayer extends Command
             '--dir' => $dir
         ]);
 
+
+        // 5. バインド登録（インターフェースがある場合のみ）
+        if (!$withoutInterface) {
+            $this->call('make:register-repository', ['name' => $name]);
+        }
+
+        
         $this->info("Complete layer created for {$name}");
     }
 }
