@@ -14,12 +14,8 @@ class MakeServiceController extends Command
     {
         $name = $this->argument('name');
         $dir = $this->option('dir');  // オプションでディレクトリを指定
-
         $this->info("Creating controller for {$name} using the service");
-
-        // Serviceクラス名を定義
         $serviceClass = "{$name}Service";
-        // コントローラーのパスを指定
         $controllerPath = app_path("Http/Controllers/{$name}Controller.php");
 
         // ファイルが存在しない場合に作成
@@ -60,8 +56,11 @@ class MakeServiceController extends Command
             // コントローラーの内容をファイルに書き込む
             File::put($controllerPath, $controllerContent);
             $this->info("Controller created: {$controllerPath}");
+            return 0;
         } else {
             $this->error("Controller {$controllerPath} already exists.");
+            return 1;
         }
     }
+    
 }

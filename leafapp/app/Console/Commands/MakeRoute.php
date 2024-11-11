@@ -9,23 +9,21 @@ class MakeRoute extends Command
 {
     protected $signature = 'make:route {name} {controller?}';
     protected $description = 'Register a route in the web.php file under auth middleware group';
-
+    
     public function handle()
     {
         $name = $this->argument('name');
         $controller = $this->argument('controller') ?: "{$name}Controller";
 
-        // web.php のファイルパスを取得
         $webRoutesPath = base_path('routes/web.php');
-
-        if (!File::exists($webRoutesPath)) {
-            $this->error('web.php not found.');
-            return Command::FAILURE;
-        }
-
-        // web.php を読み込む
         $webRoutesContent = File::get($webRoutesPath);
 
+        //web.phpがない場合、コマンド
+        if (!File::exists($webRoutesPath)) {
+            $this->error('web.php file not found.');
+            return Command::FAILURE;
+        }
+        
         // use文を追加
         $useStatement = "use App\\Http\\Controllers\\{$controller};";
         if (!str_contains($webRoutesContent, $useStatement)) {
