@@ -5,5 +5,6 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 <template>
     <Head title="WordQuestion" />
     <AuthenticatedLayout>
+        ここには単語帳クイズが入ります。
     </AuthenticatedLayout>
 </template>

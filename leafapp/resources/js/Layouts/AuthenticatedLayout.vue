@@ -14,12 +14,11 @@ interface Route {
 }
 
 /**
- * 説明://
  */
 const routes: Route[] = [
     { title: "ダッシュボード", route: 'dashboard.index'},
     { title: "マイ単語帳", route: 'mywords.index' },
-    { title: "単語クイズ", route: 'mywords.index' },
+    { title: "単語クイズ", route: 'words-question.index'},
 ]
 </script>
 
