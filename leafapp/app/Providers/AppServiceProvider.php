@@ -1,6 +1,9 @@
 <?php
 namespace App\Providers;
 
+use App\Repositories\RegisterWordsRepositoryInterface;
+use App\Repositories\RegisterWordsRepository;
+
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
@@ -12,8 +15,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-//        $this->app->bind(MockyRepositoryInterface::class, MockyRepository::class);
+        $this->app->bind(RegisterWordsRepositoryInterface::class, RegisterWordsRepository::class);
     }
+//        $this->app->bind(MockyRepositoryInterface::class, MockyRepository::class);
+    
 
     /**
      * Bootstrap any application services.
