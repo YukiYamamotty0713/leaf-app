@@ -14,6 +14,8 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                gothic: ['Noto Sans JP', 'sans-serif'], // ゴシック体
+                mincho: ['Noto Serif JP', 'serif'],    // 明朝体
             },
             backgroundColor: {
                 primary: '#B69F7E',

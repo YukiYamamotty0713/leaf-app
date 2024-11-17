@@ -11,13 +11,13 @@ use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     *　アプリの
      */
     public function register()
     {
         $this->app->bind(RegisterWordsRepositoryInterface::class, RegisterWordsRepository::class);
     }
-//        $this->app->bind(MockyRepositoryInterface::class, MockyRepository::class);
+
     
 
     /**
@@ -27,4 +27,4 @@ class AppServiceProvider extends ServiceProvider
     {
         Vite::prefetch(concurrency: 3);
     }
-}
+};
