@@ -2,22 +2,34 @@
 
 namespace App\Http\Controllers;
 
-//use App\Models\MyWord;
 use Inertia\Inertia; 
+use App\Services\MyWordsService;
 
+/**
+ * 自分の単語リストページを返すためのコントローラー
+ * index() : 全リストを返す。
+ * 
+ */
 class MyWordsController extends Controller
 {
+
+    protected $service;
+
     /**
-     * Display a listing of the MyWords.
+     * to generate service class
+     */
+    public function __construct(MyWordsService $service){
+        $this->service = $service;
+    }
+
+    /**
      * @return \Inertia\Response
      */
     public function index()
     {
-        //$myWords = MyWord::all(); 
-
-        // Inertiaで返す
+        $my_words = $this->service->get();
         return Inertia::render('User/MyWords/Index', [
-           // 'myWords' => $myWords  // Vueコンポーネントに渡す
+            'data' => $my_words, //単語リスト
         ]);
     }
 }
