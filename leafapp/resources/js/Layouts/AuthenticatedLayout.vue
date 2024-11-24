@@ -25,9 +25,14 @@ const routes: Route[] = [
 
 <template>
     <Header />
-    <div class="flex flex-row justify-center items-center">
+    <div class="flex flex-row justify-center items-center gap-x-4">
         <div v-for="item in routes" class="bg-primary">
-            <nav-link :href="route(item.route)">{{ item.title }}</nav-link>
+            <nav-link 
+            :href="route(item.route)"
+            class="hover:text-white px-3 py-2 text-sm font-medium"
+            >
+                {{ item.title }}
+            </nav-link>
         </div>
     </div>
 

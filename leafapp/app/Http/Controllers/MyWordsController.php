@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia; 
+use Illuminate\Http\JsonResponse;
 use App\Services\MyWordsService;
+
 
 /**
  * 自分の単語リストページを返すためのコントローラー
@@ -31,5 +33,11 @@ class MyWordsController extends Controller
         return Inertia::render('User/MyWords/Index', [
             'data' => $my_words, //単語リスト
         ]);
+    }
+
+    public function delete($id) : JsonResponse
+    {
+        $response = $this->service->delete($id);
+        return $response;
     }
 }
