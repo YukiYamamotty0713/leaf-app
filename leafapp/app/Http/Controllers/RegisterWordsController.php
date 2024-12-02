@@ -6,7 +6,7 @@ use App\Services\RegisterWordsService;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-
+use App\Http\Requests\RegisterWordsRequest;
 class RegisterWordsController extends Controller
 {
     protected $RegisterWordsService;
@@ -19,20 +19,21 @@ class RegisterWordsController extends Controller
     public function index()
     {
         // サービスメソッドの利用例
-        //$data = $this->RegisterWordsService->get();
+        $data = $this->RegisterWordsService->get();
         return Inertia::render('User/MyWords/RegisterWords', [
+            "data" => $data
         ]);
     }
+
     /**
      * ワードをポストするときに発動する関数
      * リダイレクト先は、"/register-words"/
-     * 
      */
-    public function store(Request $request)
+    public function store(RegisterWordsRequest $request)
     {
-        //リクエストで受け取った値をポスト
-        $post_data = $this->RegisterWordsService->store($request);
+        $this->RegisterWordsService->store($request);
         return Inertia::render('User/MyWords/RegisterWords', [
+            "data" => $this->RegisterWordsService->get(),
         ]);      
     }
 }

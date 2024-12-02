@@ -2,30 +2,30 @@
 
 namespace App\Repositories;
 
-use App\Models\MWord;
+use App\Models\UserWord;
 use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Http\JsonResponse;
 
 interface MyWordsRepositoryInterface
 {
     /**
-     * MWordを全て取得する。
+     * UserWordを全て取得する。
      * @param void
-     * @return MWord
+     * @return UserWord
      * @throws \RuntimeException
      */
     public function get();
 
     /**
-     * 指定したIDのMWordを取得する。
+     * 指定したIDのUserWordを取得する。
      * 
      * @param int $id
-     * @return MWord|null
+     * @return UserWord|null
      */
-    public function find(int $id) : ?MWord;
+    public function find(int $id) : ?UserWord;
 
     /**
-     * 指定したIDのMWordを削除する。
+     * 指定したIDのUserWordを削除する。
      * 
      * @param int $id
      * @return　JSONResponse

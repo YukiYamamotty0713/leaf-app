@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 const props = defineProps({
   data: {
     type: Object,
@@ -11,16 +11,23 @@ const props = defineProps({
   }
 });
 
+const show_word = ref(false);
+
 const emit = defineEmits(["delete"]);
 const delete_word = () => {
   emit("delete", props.data.id);
 };
-// トグル関数
+
 const toggleDescription = () => {
-  //definitionタグに対してオーバーレイクラスをトグルする
-  const definition = document.querySelector(".definition");
-  definition.classList.toggle("overlay");
+  show_word.value = !show_word.value;
 };
+//discriptionクラスのタグに、toggle_descriptionクラスを付与
+const descriptionClasses = computed(() => {
+  return {
+    'toggle_description': show_word.value,  // show_wordがtrueのとき
+    'bg-black text-black': !show_word.value,             // show_wordがfalseのとき
+  };
+});
 
 </script>
 
@@ -30,10 +37,11 @@ const toggleDescription = () => {
       {{ data.word }}
     </div>
     <div class="part-of-speech">
-      {{ data.part_of_speech }}
+      {{ data?.m_part_of_speech.name }}
     </div>
 
-      <div class="definition">
+      <div class="definition"
+          :class="descriptionClasses">
         {{ data.definition }}
       </div>
 
@@ -41,7 +49,7 @@ const toggleDescription = () => {
       type="button"
       @click="toggleDescription"
       class="toggle-description">
-      TGL
+      切り替え
     </button>
 
     <div class="delete" @click="delete_word">×</div>
@@ -50,7 +58,7 @@ const toggleDescription = () => {
 
 <style scoped>
 .card {
-  @apply rounded-lg shadow-md p-4 w-[200px] h-[150px] flex flex-col justify-between bg-accent text-primary relative;
+  @apply rounded-lg shadow-md p-4 w-[200px] h-[150px] flex flex-col justify-between bg-accent text-primary relative overflow-y-scroll overflow-hidden;
 }
 
 .word {
@@ -62,7 +70,7 @@ const toggleDescription = () => {
 }
 
 .definition {
-  @apply text-sm text-black rounded-md;
+  @apply text-sm text-black rounded-md transition-all duration-500;
 }
 
 .overlay {
@@ -75,6 +83,6 @@ const toggleDescription = () => {
 }
 
 .toggle-description {
-  @apply text-sm text-light bg-black rounded-md px-2 py-1 mt-2 cursor-pointer hover:bg-light transition-colors duration-300;
+  @apply text-sm text-light bg-black rounded-md px-2 py-1 mt-2 cursor-pointer hover:bg-primary transition-colors duration-300;
 }
 </style>

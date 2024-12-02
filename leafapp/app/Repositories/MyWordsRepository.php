@@ -2,47 +2,43 @@
 namespace App\Repositories;
 use App\Repositories\MyWordsRepositoryInterface;
 use Illuminate\Support\Collection;
-use App\Models\MWord;
+use App\Models\UserWord;
 use Illuminate\Http\JsonResponse;
 
 class MyWordsRepository implements MyWordsRepositoryInterface
 {
     /**
-     * MWordを全て取得する。
+     * UserWordを全て取得する。
      * @param void
-     * @return Collection<MWord>
+     * @return Collection<UserWord>
      * @throws \RuntimeException
      */
     public function get() : ?Collection
     {
-        try { 
-            $words = MWord::all();
+            $words = UserWord::with('mPartOfSpeech')->get();
             return $words;
 
-        } catch (\Exception $e) {
-            throw new \RuntimeException('Failed to fetch words.', 0, $e);
-        }
     }
 
     /**
-     * 指定したIDのMWordを取得する。
+     * 指定したIDのUserWordを取得する。
      * @param int $id
-     * @return MWord|null
+     * @return UserWord|null
      */
-    public function find(int $id) : ?MWord 
+    public function find(int $id) : ?UserWord 
     {
-        $word = MWord::find($id);
+        $word = UserWord::find($id);
         return $word;
     }
 
     /**
-     * 指定したIDのMWordを削除する。
+     * 指定したIDのUserWordを削除する。
      * @param int $id
      * @return void
      */
     public function delete(int $id): void
     {
-        $word = MWord::findOrFail($id);
+        $word = UserWord::findOrFail($id);
         $word->delete();
     }
 }

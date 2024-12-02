@@ -36,7 +36,14 @@ const submit = () => {
         <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
             {{ status }}
         </div>
-
+        <div>
+            <h1 class="text-accent mb-2">
+                🍂The　Leaf　
+            </h1>
+            <p class="text-accent text-sm">
+                ～苦手な英語を、得意な一枚に～
+            </p>
+        </div>
         <form @submit.prevent="submit">
             <div>
                 <InputLabel for="email" value="Email" />
@@ -69,23 +76,8 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
-            <div class="mt-4 block">
-                <label class="flex items-center">
-                    <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ms-2 text-sm text-gray-600"
-                        >Remember me</span
-                    >
-                </label>
-            </div>
-
             <div class="mt-4 flex items-center justify-end">
-                <Link
-                    v-if="canResetPassword"
-                    :href="route('password.request')"
-                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                    Forgot your password?
-                </Link>
+
 
                 <PrimaryButton
                     id="login"

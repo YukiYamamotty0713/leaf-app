@@ -10,6 +10,14 @@ const props = defineProps({
 //コピーを作成
 const visible_data = ref(props.data);
 
+const post_delete_word = async (id) => {
+    try {
+        await axios.delete(`/api/words/${id}`);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 const delete_word = (id) => {
     visible_data.value = visible_data.value.filter((itemy) => itemy.id !== id);
 }

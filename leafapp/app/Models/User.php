@@ -6,7 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use App\Models\MPartOfSpeech;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -45,4 +45,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
+    /**
+     * [RelationShip] MPartOfSpeechとのリレーション
+     * 
+     */
+    public function MPartOfSpeech()
+    {
+        return $this->HasOne(MPartOfSpeech::class);
+    }
 }
+

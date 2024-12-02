@@ -3,23 +3,52 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
+/**
+ * フォームの初期値
+ * @type WObject
+ */
 const form = useForm({
     word: '', // 英単語
-    definition: '' // 説明
+    definition: '', // 説明
+    part_of_speech: '' // 品詞
 });
+
+/**
+ * フォームをリセット
+ * @returns void
+ */
+function reset_form(){
+    form.word = '';
+    form.definition = '';
+    form.part_of_speech = '';
+}
+const props = defineProps({
+    data:Object
+});
+
 
 const alertMessage = ref(''); // アラートメッセージ
 const isAlertVisible = ref(false); // アラートの表示状態
 
+/**
+ * フォームに入力された値をLaravelに送信する
+ * @returns void
+ * @param {Object} form
+ */
 const submit = () => {
     form.post('/register-words', {
         onSuccess: () => {
-            showAlert('登録されました');
+            reset_form();
+            showAlert('英単語が登録されました');
         }
     });
 };
 
-// アラートを表示し、3秒後にフェードアウト
+
+/*
+*アラートを表示し、3秒後にフェードアウト
+*@param {string} message
+*/
 const showAlert = (message) => {
     alertMessage.value = message;
     isAlertVisible.value = true;
@@ -28,13 +57,14 @@ const showAlert = (message) => {
         isAlertVisible.value = false;
     }, 3000);
 };
+
 </script>
 
 <template>
     <Head title="RegisterWords"/>
     <AuthenticatedLayout>
         <div class="title">
-            ここでは自分の覚えたい英単語を登録することができます。
+            {{ data.title }}
         </div>
 
         <!-- アラート -->
@@ -52,14 +82,31 @@ const showAlert = (message) => {
                 placeholder="apple" 
                 class="rounded-md w-full" 
             />
-
-            <label>説明</label>
+            <p class="text-red-700">
+                {{ form.errors.word }}
+            </p>
+            <label>📖説明</label>
             <input 
                 v-model="form.definition" 
                 type="text" 
                 placeholder="りんご" 
                 class="rounded-md w-full" 
             />
+            <p class="text-red-700">
+                {{ form.errors.definition }}
+            </p>
+            <label>品詞</label>
+            <select 
+            type="select" 
+            v-model="form.part_of_speech" 
+            class="rounded-md w-full">
+                <option v-for="part_of_speech in data.m_part_of_speech" :value="part_of_speech.id">
+                    {{ part_of_speech.name }}
+                </option>
+            </select>
+            <p class="text-red-700">
+                {{ form.errors.part_of_speech }}
+            </p>
             <button class="submit-button" type="button" @click="submit">送信</button>
         </form>
     </AuthenticatedLayout>

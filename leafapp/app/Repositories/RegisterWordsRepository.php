@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Repositories\RegisterWordsRepositoryInterface;
-use App\Models\MWord;
+use App\Models\UserWord;
 
 class RegisterWordsRepository implements RegisterWordsRepositoryInterface
 {
@@ -14,17 +14,16 @@ class RegisterWordsRepository implements RegisterWordsRepositoryInterface
      */
     public function get()
     {
-        return MWord::all();
+        return UserWord::with('m_part_of_speech')->all();
     }
-
     /**
      * 新しい英単語を作成
      * @param array $data 英単語のデータ（例: ['word' => 'apple', 'description' => 'りんご']）
-     * @return MWord 作成されたMWordモデルインスタンス
+     * @return UserWord 作成されたMWordモデルインスタンス
      */
-    public function create(array $data) :MWord
+    public function create(array $data) :UserWord
     {
-        $m_word = MWord::create($data);
-        return $m_word;
+        $user_word = UserWord::with('m_part_of_speech')->create($data);
+        return $user_word;
     }
 }
