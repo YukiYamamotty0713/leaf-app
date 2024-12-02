@@ -1,62 +1,84 @@
-<script setup>
+<script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
+
+/**
+ * 品詞の型定義
+ * 
+ */
+interface PartOfSpeech{
+    id:Number,
+    name:String,
+}
+
+// フォームデータの型定義
+interface WordForm {
+  word: string; // 英単語
+  definition: string; // 説明
+  part_of_speech: PartOfSpeech; // 品詞
+}
 /**
  * フォームの初期値
  * @type WObject
  */
-const form = useForm({
-    word: '', // 英単語
-    definition: '', // 説明
-    part_of_speech: '' // 品詞
+const form = useForm<WordForm>({
+  word: '', // 英単語
+  definition: '', // 説明
+  part_of_speech: {} as PartOfSpeech,
 });
+
 
 /**
  * フォームをリセット
  * @returns void
  */
-function reset_form(){
+function reset_form():void{
     form.word = '';
     form.definition = '';
-    form.part_of_speech = '';
 }
-const props = defineProps({
-    data:Object
-});
 
+// propsの型定義
+interface Props {
+    data: {
+    title: string;
+    m_part_of_speech: PartOfSpeech[];
+  };
+}
 
-const alertMessage = ref(''); // アラートメッセージ
-const isAlertVisible = ref(false); // アラートの表示状態
+// definePropsに型を設定
+const props = defineProps<Props>();
+
+const alertMessage = ref<String>(''); // アラートメッセージ
+const isAlertVisible = ref<Boolean>(false); // アラートの表示状態
 
 /**
  * フォームに入力された値をLaravelに送信する
  * @returns void
- * @param {Object} form
  */
-const submit = () => {
-    form.post('/register-words', {
-        onSuccess: () => {
-            reset_form();
-            showAlert('英単語が登録されました');
-        }
-    });
+ const submit = (): void => {
+  form.post('/register-words', {
+    onSuccess: () => {
+        reset_form();
+        showAlert('英単語が登録されました');
+    }
+  });
 };
 
 
-/*
-*アラートを表示し、3秒後にフェードアウト
-*@param {string} message
-*/
-const showAlert = (message) => {
-    alertMessage.value = message;
-    isAlertVisible.value = true;
-
-    setTimeout(() => {
-        isAlertVisible.value = false;
-    }, 3000);
-};
+/**
+ * アラートを表示する
+ * @param message 表示するアラートメッセージ
+ * @returns void
+ */
+ function showAlert(message: string): void {
+  alertMessage.value = message;
+  isAlertVisible.value = true;
+  setTimeout(() => {
+    isAlertVisible.value = false;
+  }, 3000); // 3秒後に非表示
+}
 
 </script>
 

@@ -1,31 +1,36 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from "vue";
-const props = defineProps({
-  data: {
-    type: Object,
-    default: () => ({
-      word: "りんご",
-      definition: "果物の一種で、甘い味が特徴です。",
-      part_of_speech: "名詞",
-    })
-  }
-});
 
-const show_word = ref(false);
+interface WordData {
+  id:number;
+  word:string;
+  definition:string;
+  part_of_speech:string;
+}
 
-const emit = defineEmits(["delete"]);
-const delete_word = () => {
+const props = defineProps<{
+  data:WordData;
+}>();
+
+const show_word = ref<boolean>(false);
+
+// Emitの型定義
+const emit = defineEmits<{
+  (event: "delete", id: number): void;
+}>();
+
+const delete_word:Function = () => {
   emit("delete", props.data.id);
 };
 
-const toggleDescription = () => {
+const toggleDescription:Function = () : void => {
   show_word.value = !show_word.value;
 };
 //discriptionクラスのタグに、toggle_descriptionクラスを付与
-const descriptionClasses = computed(() => {
+const descriptionClasses:ComputedRef = computed(() => {
   return {
     'toggle_description': show_word.value,  // show_wordがtrueのとき
-    'bg-black text-black': !show_word.value,             // show_wordがfalseのとき
+    'bg-black text-black': !show_word.value,  // show_wordがfalseのとき
   };
 });
 
