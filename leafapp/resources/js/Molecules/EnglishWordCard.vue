@@ -58,7 +58,7 @@ const descriptionClasses = computed(() => {
 
 <style scoped>
 .card {
-  @apply rounded-lg shadow-md p-4 w-[200px] h-[150px] flex flex-col justify-between bg-accent text-primary relative overflow-y-scroll overflow-hidden;
+  @apply rounded-lg shadow-md p-4 w-[200px] h-[150px] flex flex-col justify-between bg-secondary text-primary relative overflow-y-scroll scrollbar-none;
 }
 
 .word {

@@ -19,7 +19,7 @@ export default {
             },
             backgroundColor: {
                 primary: '#B69F7E',
-                secondary: '#8C7A63',
+                secondary: '#C0CDDC',
                 accent: '#566A56',
                 light: '#F5F5F5',
                 dark: '#2D2D2D',
@@ -27,7 +27,7 @@ export default {
             },
             textColor: {
                 primary: '#2D2D2D',
-                secondary: '#4A4A4A',
+                secondary:'#C0CDDC',
                 accent: '#566A56',
                 light: '#FFFFFF',
                 dark: '#1A1A1A',
@@ -36,5 +36,18 @@ export default {
         },
     },
 
-    plugins: [forms],
+    plugins: [
+        forms,
+        function ({ addUtilities }) {
+            addUtilities({
+              '.scrollbar-none': {
+                '-ms-overflow-style': 'none', /* IE/Edge */
+                'scrollbar-width': 'none',   /* Firefox */
+              },
+              '.scrollbar-none::-webkit-scrollbar': {
+                display: 'none', /* Chrome/Safari */
+              },
+            });
+          },
+        ],
 };

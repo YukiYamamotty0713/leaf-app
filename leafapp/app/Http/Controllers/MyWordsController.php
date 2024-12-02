@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia; 
 use Illuminate\Http\JsonResponse;
 use App\Services\MyWordsService;
-
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * 自分の単語リストページを返すためのコントローラー
@@ -38,6 +38,12 @@ class MyWordsController extends Controller
     public function delete($id) : JsonResponse
     {
         $response = $this->service->delete($id);
+        return $response;
+    }
+
+    public function download_csv() :StreamedResponse
+    {
+        $response = $this->service->download_csv();
         return $response;
     }
 }

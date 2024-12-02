@@ -8,6 +8,9 @@ use App\Http\Controllers\RegisterWordsController;
 Route::middleware('auth')->group(function () {
     Route::get('dashboard',[DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('my-words', [MyWordsController::class, 'index'])->name('mywords.index');
+    Route::get('download_csv', [MyWordsController::class, 'download_csv'])->name('my_words.download_csv');
+    Route::delete('api/words/{id}', [MyWordsController::class, 'delete'])->name('mywords.delete');
+
     Route::get('words-question', [WordsQuestionController::class, 'index'])->name('words-question.index'); 
     Route::get('register-words', [RegisterWordsController::class, 'index'])->name('register-words.index');
     Route::post('register-words', [RegisterWordsController::class, 'store'])->name('register-words.store');
