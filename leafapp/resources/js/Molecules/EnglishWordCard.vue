@@ -40,7 +40,7 @@ const descriptionClasses = computed(() => {
 });
 
 const toggleWord = computed(() => {
-  return showWord.value ? "Show" : "Hide";
+  return showWord.value ? "Hide" : "Show";
 });
 
 </script>
@@ -67,7 +67,7 @@ const toggleWord = computed(() => {
       class="delete_button" 
       @click="deleteWord"
       >
-      ×
+      ✅
     </div>
   </div>
 </template>
@@ -95,7 +95,7 @@ const toggleWord = computed(() => {
 
 .delete_button {
   @apply absolute top-3 right-3;
-  @apply text-sm text-light cursor-pointer hover:top-2 transition-all duration-300;
+  @apply text-2xl text-light cursor-pointer hover:top-2 transition-all duration-300;
 }
 
 .toggle-description {

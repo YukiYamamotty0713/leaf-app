@@ -3,8 +3,6 @@ namespace App\Repositories;
 use App\Repositories\MyWordsRepositoryInterface;
 use Illuminate\Support\Collection;
 use App\Models\UserWord;
-use Illuminate\Http\JsonResponse;
-
 class MyWordsRepository implements MyWordsRepositoryInterface
 {
     /**

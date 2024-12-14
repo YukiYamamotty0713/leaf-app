@@ -5,19 +5,24 @@ namespace App\Services;
 use App\Repositories\MPartOfSpeechRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Repositories\RegisterWordsRepositoryInterface;
+use App\Repositories\DailyActivityRepositoryInterface;
+use Illuminate\Support\Facades\Auth;
 use App\Services\CommonService\AuthService;
-use Illuminate\Support\Facades\Log;
+
 class RegisterWordsService
 {
     protected $RegisterWordsRepositoryInterface;
     protected $MPartOfSpeechRepositoryInterface;
+    protected $DailyActivityRepositoryInterface;
     protected $AuthService;
 
     public function __construct(RegisterWordsRepositoryInterface $RegisterWordsRepositoryInterface, 
-                                MPartOfSpeechRepositoryInterface $MPartOfSpeechRepositoryInterface)
+                                MPartOfSpeechRepositoryInterface $MPartOfSpeechRepositoryInterface,
+                                DailyActivityRepositoryInterface $DailyActivityRepositoryInterface)
     {
         $this->RegisterWordsRepositoryInterface = $RegisterWordsRepositoryInterface;
         $this->MPartOfSpeechRepositoryInterface = $MPartOfSpeechRepositoryInterface;
+        $this->DailyActivityRepositoryInterface = $DailyActivityRepositoryInterface;
         $this->AuthService = new AuthService();
     }
 
@@ -42,6 +47,9 @@ class RegisterWordsService
            "part_of_speech_id" => $request->partOfSpeech,
         ]);
 
+
+        //DailyActivityRepositoryInterfaceに登録
+        $this->DailyActivityRepositoryInterface->register();
         return $posts;
     }
 }

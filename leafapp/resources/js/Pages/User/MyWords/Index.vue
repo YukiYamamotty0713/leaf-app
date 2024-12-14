@@ -38,10 +38,10 @@ const post_delete_word = async (id:number) =>
     try {
         await axios.delete(`${API_ENDPOINT}${id}`);
         update_visible_data(id);
-        delete_result.value = '削除しました';
+        delete_result.value = '✅おめでとうございます！リストからスタッシュしました。';
     } catch (error:any) {
         console.error(error);
-        delete_result.value = '削除に失敗しました';
+        delete_result.value = 'スタッシュに失敗しました';
     }
 }
 
@@ -89,7 +89,7 @@ function update_visible_data(id:number){
 <template>
     <authenticated-layout>
         <h2 class="py-4 text-lg bg-white p-2 rounded-lg my-3">
-            ✅ここには自分が登録した単語帳が入ります 
+            📖ここには自分が登録した単語帳が入ります 
         </h2>
             <p class="text-red-700">
                 {{ delete_result }}

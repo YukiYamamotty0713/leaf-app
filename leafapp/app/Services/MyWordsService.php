@@ -4,18 +4,19 @@ namespace App\Services;
 use Illuminate\Http\JsonResponse;
 
 use App\Repositories\MyWordsRepositoryInterface;
-use Illuminate\Database\Eloquent\Casts\Json;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Response;
+use App\Repositories\DailyActivityRepositoryInterface;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class MyWordsService
 {
     protected $MyWordsRepositoryInterface;
+    protected $DailyActivityRepositoryInterface;
 
-    public function __construct(MyWordsRepositoryInterface $MyWordsRepositoryInterface)
+    public function __construct(MyWordsRepositoryInterface $MyWordsRepositoryInterface,
+                                DailyActivityRepositoryInterface $DailyActivityRepositoryInterface)
     {
         $this->MyWordsRepositoryInterface = $MyWordsRepositoryInterface;
+        $this->DailyActivityRepositoryInterface = $DailyActivityRepositoryInterface;
     }
 
     public function get()
@@ -27,6 +28,7 @@ class MyWordsService
     {
         try {
             $this->MyWordsRepositoryInterface->delete($id);
+            $this->DailyActivityRepositoryInterface->delete();
             return new JsonResponse(['message' => 'Word deleted.' . $id ], 200);
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'Failed to delete word.' . $id], 500);

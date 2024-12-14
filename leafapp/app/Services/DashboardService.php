@@ -3,14 +3,18 @@
 namespace App\Services;
 
 use App\Repositories\DashboardRepositoryInterface;
+use App\Repositories\DailyActivityRepositoryInterface;
 use App\Enums\MPartOfSpeech;
 class DashboardService
 {
     protected $DashboardRepositoryInterface;
+    protected $DailyActivityRepositoryInterface;
 
-    public function __construct(DashboardRepositoryInterface $DashboardRepositoryInterface)
+    public function __construct(DashboardRepositoryInterface $DashboardRepositoryInterface,
+                                DailyActivityRepositoryInterface $DailyActivityRepositoryInterface)
     {
         $this->DashboardRepositoryInterface = $DashboardRepositoryInterface;
+        $this->DailyActivityRepositoryInterface = $DailyActivityRepositoryInterface;
     }
 
     public function getResisterWordsCounts(): array
@@ -24,5 +28,10 @@ class DashboardService
         }
         $counts["Sum"] = $sum;
         return $counts;
+    }
+
+    public function getTotalActivitiy(): array
+    {
+        return $this->DailyActivityRepositoryInterface->get();
     }
 }

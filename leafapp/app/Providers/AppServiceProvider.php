@@ -9,6 +9,8 @@ use App\Repositories\MPartOfSpeechRepository;
 use App\Repositories\MPartOfSpeechRepositoryInterface;
 use App\Repositories\DashboardRepository;
 use App\Repositories\DashboardRepositoryInterface;
+use App\Repositories\DailyActivityRepository;
+use App\Repositories\DailyActivityRepositoryInterface;
 
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
@@ -18,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
 {
     /**
      * アプリケーションのグローバル設定
-     * リポジトリインターフェースと具象リポジトリを紐づける
+     * リポジトリインターフェースと具象クラスをバインド
      */
     public function register()
     {
@@ -26,9 +28,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(MyWordsRepositoryInterface::class, MyWordsRepository::class);
         $this->app->bind(MPartOfSpeechRepositoryInterface::class, MPartOfSpeechRepository::class);
         $this->app->bind(DashboardRepositoryInterface::class, DashboardRepository::class);
+        $this->app->bind(DailyActivityRepositoryInterface::class, DailyActivityRepository::class);
     }
 
-    
 
     /**
      * Bootstrap any application services.

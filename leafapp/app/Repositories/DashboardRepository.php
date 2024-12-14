@@ -18,7 +18,7 @@ class DashboardRepository implements DashboardRepositoryInterface
     {   
         $userId = Auth::id();
         $words = UserWord::where('user_id', $userId)->get();
-        return 0;
+        return $words;
     }
 
     public function count(MPartOfSpeech $partOfSpeech): int
