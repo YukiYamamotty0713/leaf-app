@@ -4,7 +4,12 @@
         "paths": {
             "@/*": ["resources/js/*"],
             "ziggy-js": ["./vendor/tightenco/ziggy"]
-        }
+        },
+        "allowImportingTsExtensions": true,
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
     },
+
     "exclude": ["node_modules", "public"]
 }

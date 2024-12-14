@@ -53,10 +53,9 @@ const toggleWord = computed(() => {
     <div class="part-of-speech">
       {{ data?.m_part_of_speech?.name }}
     </div>
-    
-      <div class="definition"
+    <div class="definition"
           :class="descriptionClasses">
-        {{ data.definition }}
+        {{ data.definition }} 
       </div>
     <button
       type="button"

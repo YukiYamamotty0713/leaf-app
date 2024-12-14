@@ -1,7 +1,16 @@
-<script setup>
+<script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
 import PrimaryCard from '@/Atoms/PrimaryCard.vue';
+import RegisterBreakdownChart from '@/Atoms/RegisterWordBreakdownChart/Chart.vue';
+import { RegisterWordsCounts } from './interface.ts'; // 拡張子 .ts を追加
+import { PropType } from 'vue';
+const props = defineProps({
+  registerWordsCounts: {
+    type: Object as PropType<RegisterWordsCounts>, // 型を明示的に指定
+    required: true,
+  }
+});
 </script>
 
 <template>
@@ -9,11 +18,11 @@ import PrimaryCard from '@/Atoms/PrimaryCard.vue';
     <AuthenticatedLayout>
             <primary-card>
                 <template #header>
-                    これはDashBoardのテストです
+                    📉Dashboard
                 </template>
-                <span>
-                    実際にはここにスロットの内容が差し込まれます
-                </span>
+                <register-breakdown-chart
+                :counts="registerWordsCounts"
+                />
             </primary-card>
     </AuthenticatedLayout>
 </template>
