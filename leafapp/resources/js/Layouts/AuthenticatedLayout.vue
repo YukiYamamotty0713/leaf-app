@@ -24,6 +24,11 @@ const routes: Route[] = [
 
 <template>
     <Header />
+    <div class="flex justify-center">
+        <p class="text-base　font-bold text-black">
+            📚～苦手な単語を、得意な一枚に～🖊
+        </p>
+    </div>
     <div class="flex flex-row justify-center items-center gap-x-4">
         <div v-for="item in routes" class="bg-primary">
             <nav-link 

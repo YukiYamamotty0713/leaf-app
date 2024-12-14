@@ -21,7 +21,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
             </div>
 
             <!-- メイン部分 -->
-            <div>
+            <div class="">
                 <application-logo/>
                 <span class="text-primary">
                     <title-text/>
