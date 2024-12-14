@@ -3,30 +3,27 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
-
 /**
- * 品詞の型定義
- * 
+ * 品詞
  */
-interface PartOfSpeech{
-    id:Number,
-    name:String,
+interface partOfSpeech{
+    id:number,
+    name:string,
 }
 
-// フォームデータの型定義
 interface WordForm {
   word: string; // 英単語
   definition: string; // 説明
-  part_of_speech: PartOfSpeech; // 品詞
+  partOfSpeech: partOfSpeech; // 品詞
 }
+
 /**
  * フォームの初期値
- * @type WObject
  */
 const form = useForm<WordForm>({
   word: '', // 英単語
   definition: '', // 説明
-  part_of_speech: {} as PartOfSpeech,
+  partOfSpeech: {} as partOfSpeech,
 });
 
 
@@ -34,7 +31,7 @@ const form = useForm<WordForm>({
  * フォームをリセット
  * @returns void
  */
-function reset_form():void{
+function resetForm():void{
     form.word = '';
     form.definition = '';
 }
@@ -43,15 +40,15 @@ function reset_form():void{
 interface Props {
     data: {
     title: string;
-    m_part_of_speech: PartOfSpeech[];
+    mPartOfSpeech: partOfSpeech[];
   };
 }
 
 // definePropsに型を設定
 const props = defineProps<Props>();
 
-const alertMessage = ref<String>(''); // アラートメッセージ
-const isAlertVisible = ref<Boolean>(false); // アラートの表示状態
+const alertMessage = ref<string>(''); // アラートメッセージ
+const isAlertVisible = ref<boolean>(false); // アラートの表示状態
 
 /**
  * フォームに入力された値をLaravelに送信する
@@ -60,7 +57,7 @@ const isAlertVisible = ref<Boolean>(false); // アラートの表示状態
  const submit = (): void => {
   form.post('/register-words', {
     onSuccess: () => {
-        reset_form();
+        resetForm();
         showAlert('英単語が登録されました');
     }
   });
@@ -91,7 +88,10 @@ const isAlertVisible = ref<Boolean>(false); // アラートの表示状態
 
         <!-- アラート -->
         <transition name="fade">
-            <div v-if="isAlertVisible" class="alert">
+            <div 
+              v-if="isAlertVisible" 
+              class="alert"
+              >
                 {{ alertMessage }}
             </div>
         </transition>
@@ -117,19 +117,29 @@ const isAlertVisible = ref<Boolean>(false); // アラートの表示状態
             <p class="text-red-700">
                 {{ form.errors.definition }}
             </p>
-            <label>品詞</label>
+            <label>
+                品詞
+            </label>
             <select 
-            type="select" 
-            v-model="form.part_of_speech" 
+            v-model="form.partOfSpeech" 
             class="rounded-md w-full">
-                <option v-for="part_of_speech in data.m_part_of_speech" :value="part_of_speech.id">
-                    {{ part_of_speech.name }}
+                <option 
+                  v-for="partOfSpeech in data.mPartOfSpeech" 
+                  :value="partOfSpeech.id"
+                  >
+                    {{ partOfSpeech.name }}
                 </option>
             </select>
             <p class="text-red-700">
-                {{ form.errors.part_of_speech }}
+                {{ form.errors.partOfSpeech }}
             </p>
-            <button class="submit-button" type="button" @click="submit">送信</button>
+            <button 
+              class="submit-button" 
+              type="button" 
+              @click="submit"
+              >
+              送信
+            </button>
         </form>
     </AuthenticatedLayout>
 </template>

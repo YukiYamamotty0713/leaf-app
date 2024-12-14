@@ -5,7 +5,12 @@ interface WordData {
   id:number;
   word:string;
   definition:string;
-  part_of_speech:string;
+  part_of_speech:PartOfSpeech;
+}
+
+interface PartOfSpeech{
+  id:number;
+  name:string;
 }
 
 const props = defineProps<{
@@ -19,15 +24,15 @@ const emit = defineEmits<{
   (event: "delete", id: number): void;
 }>();
 
-const delete_word:Function = () => {
+const delete_word = () => {
   emit("delete", props.data.id);
 };
 
-const toggleDescription:Function = () : void => {
+const toggleDescription = () : void => {
   show_word.value = !show_word.value;
 };
 //discriptionクラスのタグに、toggle_descriptionクラスを付与
-const descriptionClasses:ComputedRef = computed(() => {
+const descriptionClasses = computed(() => {
   return {
     'toggle_description': show_word.value,  // show_wordがtrueのとき
     'bg-black text-black': !show_word.value,  // show_wordがfalseのとき
@@ -42,7 +47,7 @@ const descriptionClasses:ComputedRef = computed(() => {
       {{ data.word }}
     </div>
     <div class="part-of-speech">
-      {{ data?.m_part_of_speech.name }}
+      {{ data?.part_of_speech?.name }}
     </div>
 
       <div class="definition"
@@ -57,7 +62,7 @@ const descriptionClasses:ComputedRef = computed(() => {
       切り替え
     </button>
 
-    <div class="delete" @click="delete_word">×</div>
+    <div class="delete_button" @click="delete_word">×</div>
   </div>
 </template>
 
@@ -82,7 +87,7 @@ const descriptionClasses:ComputedRef = computed(() => {
   @apply bg-black;
 }
 
-.delete {
+.delete_button {
   @apply absolute top-3 right-3;
   @apply text-sm text-light cursor-pointer hover:top-2 transition-all duration-300;
 }

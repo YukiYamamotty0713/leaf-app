@@ -6,6 +6,7 @@ use App\Repositories\MPartOfSpeechRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Repositories\RegisterWordsRepositoryInterface;
 use App\Services\CommonService\AuthService;
+use Illuminate\Support\Facades\Log;
 class RegisterWordsService
 {
     protected $RegisterWordsRepositoryInterface;
@@ -23,10 +24,10 @@ class RegisterWordsService
     public function get()
     {   
         $title = "ここでは自分の覚えたい英単語を登録できます";
-        $m_part_of_speech = $this->MPartOfSpeechRepositoryInterface->get();
+        $mPartOfSpeech = $this->MPartOfSpeechRepositoryInterface->get();
         $data = [
             "title" => $title,
-            "m_part_of_speech" => $m_part_of_speech
+            "mPartOfSpeech" => $mPartOfSpeech
         ];
         return $data;
     }
@@ -38,7 +39,7 @@ class RegisterWordsService
            "word" => $request->word,
            "user_id" => $this->AuthService->get_id(),
            "definition"=> $request->definition,
-           "part_of_speech_id" => $request->part_of_speech,
+           "part_of_speech_id" => $request->partOfSpeech,
         ]);
 
         return $posts;

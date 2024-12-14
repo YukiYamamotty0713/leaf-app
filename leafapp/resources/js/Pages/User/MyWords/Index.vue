@@ -1,15 +1,30 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import EnglishWordCard from '@/Molecules/EnglishWordCard.vue';
 import axios from 'axios';
 import CSVDownload from '@/Icons/CSVDownload.vue';
-const props = defineProps({
-    data:Object
-})
+
+interface PartOfSpeech{
+    id:number;
+    name:string;
+}
+interface MyWord {
+    id:number;
+    word:string;
+    definition:string;
+    part_of_speech:PartOfSpeech;
+}
+
+const props = defineProps<{ 
+            data:MyWord[]
+            }>();
 
 //コピーを作成
-const visible_data = ref(props.data);
+const visible_data = ref<MyWord[]>(props.data)
+
+const API_ENDPOINT = '/api/words/';
+const CSV_FILENAME = 'data.csv';
 
 
 /**
@@ -18,22 +33,22 @@ const visible_data = ref(props.data);
  * @param {number} id
  * @returns void
  */
-const post_delete_word = async (id) => 
+const post_delete_word = async (id:number) => 
 {
     try {
-        await axios.delete(`/api/words/${id}`);
+        await axios.delete(`${API_ENDPOINT}${id}`);
         update_visible_data(id);
         delete_result.value = '削除しました';
-    } catch (error) {
+    } catch (error:any) {
         console.error(error);
         delete_result.value = '削除に失敗しました';
     }
 }
 
-const delete_result = ref(''); // 削除結果
+const delete_result = ref<string>(''); // 削除結果
 
-function update_visible_data(id){
-    visible_data.value = visible_data.value.filter((item) => item.id !== id);
+function update_visible_data(id:number){
+    visible_data.value = visible_data.value.filter((item:MyWord) => item.id !== id);
 }
 
 /**
@@ -53,7 +68,7 @@ function update_visible_data(id){
         const link = document.createElement('a');
         const url = URL.createObjectURL(blob);
         link.href = url;
-        link.setAttribute('download', 'data.csv'); // ダウンロード時のファイル名
+        link.setAttribute('download', CSV_FILENAME);
         document.body.appendChild(link);
         link.click();
 

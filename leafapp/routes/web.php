@@ -16,7 +16,4 @@ Route::middleware('auth')->group(function () {
     Route::post('register-words', [RegisterWordsController::class, 'store'])->name('register-words.store');
 });
 
-
-
-
 require __DIR__.'/auth.php';
