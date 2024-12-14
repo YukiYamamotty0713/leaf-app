@@ -83,25 +83,27 @@ function update_visible_data(id:number){
     }
 }
 
+
 </script>
 
 <template>
     <authenticated-layout>
-        <h2 class="py-4 text-lg bg-white p-2 rounded-lg my-2">
-            ここには自分が登録した単語帳が入ります 
+        <h2 class="py-4 text-lg bg-white p-2 rounded-lg my-3">
+            ✅ここには自分が登録した単語帳が入ります 
         </h2>
-        <div class="h-12 flex items-center pl-3">
             <p class="text-red-700">
                 {{ delete_result }}
             </p>
-        </div>
         <div class="flex justify-end">
-            <CSVDownload @click="download_csv"/>
+            <CSVDownload 
+              @click="download_csv"/>
         </div>
         <div class="my-words-wrapper">
-            <transition-group name="fade">
-                <div v-for="item in visible_data"
-                    :key="item.id">            
+            <transition-group 
+              name="fade">
+                <div
+                  v-for="item in visible_data"
+                  :key="item.id">            
                     <english-word-card 
                         :data="item"
                         @delete="post_delete_word"/>
