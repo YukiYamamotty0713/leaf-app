@@ -1,4 +1,4 @@
-export interface RegisterWordsCounts {
+export interface RegisterWordsCounts  {
     Noun: number;
     Verb: number;
     Adjective: number;
@@ -10,4 +10,13 @@ export interface RegisterWordsCounts {
     Idiom: number;
     EnglishStructure: number;
     Sum:number;
+  }
+export interface WeeklyActivities {
+    days: string[];
+    activities: number[];
+  }
+
+  export interface DailyActivities {
+    register:number;
+    delete:number;
   }

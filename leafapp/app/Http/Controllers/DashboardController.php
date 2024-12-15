@@ -17,9 +17,11 @@ class DashboardController extends Controller
     {
         $registerWordsCounts = $this->service->getResisterWordsCounts();
         $totalActivity = $this->service->getTotalActivitiy();
+        $weeklyActivity = $this->service->getWeeklyActivity();
         return Inertia::render('User/Dashboard/Index',[
             "registerWordsCounts" => $registerWordsCounts,
             "totalActivity" => $totalActivity,
+            "weeklyActivity" => $weeklyActivity
         ]);
     }
 }

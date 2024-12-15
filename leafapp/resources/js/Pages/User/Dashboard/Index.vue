@@ -4,7 +4,8 @@ import { Head } from '@inertiajs/vue3';
 import PrimaryCard from '@/Atoms/PrimaryCard.vue';
 import RegisterBreakdownChart from '@/Atoms/RegisterWordBreakdownChart/Chart.vue';
 import TotalActivityChart  from '@/Atoms/TotalActivityChart/Chart.vue';
-import { RegisterWordsCounts } from './interface.ts';
+import WeeklyActivityChart from '@/Atoms/WeeklyActivityChart/Chart.vue';
+import { RegisterWordsCounts, WeeklyActivities } from './interface.ts';
 import { PropType } from 'vue';
 
 const props = defineProps({
@@ -13,10 +14,16 @@ const props = defineProps({
     required: true,
   },
   totalActivity:{
-    type:Array,
-    required:true 
+    type: Array as PropType<number[]>,
+    required:true,
+  },
+  weeklyActivity:{
+    type:Object as PropType<WeeklyActivities>,
+    required:true,
   }
 });
+
+console.log(props.weeklyActivity);
 </script>
 
 <template>
@@ -28,12 +35,23 @@ const props = defineProps({
                 </template>
                 <div class="flex flex-row justify-between">
                 <register-breakdown-chart
-                :counts="registerWordsCounts"
+                :counts="props.registerWordsCounts"
                 />
                 <total-activity-chart
-                :counts="totalActivity"
+                :counts="props.totalActivity"
                 />
               </div>
+            </primary-card>
+            
+            <div class="h-[40px]"/>
+
+            <primary-card>
+              <template #header>
+                📊Weekly Activity
+                </template>
+                <weekly-activity-chart
+                :weekly-activity="props.weeklyActivity"
+                /> 
             </primary-card>
     </AuthenticatedLayout>
 </template>
