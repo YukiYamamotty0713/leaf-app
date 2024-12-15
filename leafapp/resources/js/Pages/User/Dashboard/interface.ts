@@ -13,7 +13,7 @@ export interface RegisterWordsCounts  {
   }
 export interface WeeklyActivities {
     days: string[];
-    activities: number[];
+    activities: DailyActivities[];
   }
 
   export interface DailyActivities {

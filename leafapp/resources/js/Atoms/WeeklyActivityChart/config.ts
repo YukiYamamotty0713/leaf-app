@@ -5,12 +5,11 @@ export interface Dataset {
 }
 // 折れ線グラフのデータ設定
 export const getData = (labels: string[], registerCounts: number[],deleteCounts:number[]) => {
-    console.log(deleteCounts);
     return {
       labels: labels,
       datasets: [
         {
-          label: 'Register Count',  // ラベル
+          label: '登録数',  // ラベル
           data: registerCounts,     // 活動データ
           borderColor: 'rgb(75, 192, 192)',  // 線の色
           backgroundColor: 'rgba(75, 192, 192, 0.2)',  // 塗りつぶしの色
@@ -18,7 +17,7 @@ export const getData = (labels: string[], registerCounts: number[],deleteCounts:
           tension: 0.4,  // 曲線の滑らかさ
         },
         {
-          label: 'Delete Count',  // ラベル
+          label: 'スタッシュ数',  // ラベル
           data: deleteCounts,     // 活動データ
           borderColor: 'rgb(255, 99, 132)',  // 線の色
           backgroundColor: 'rgba(255, 99, 132, 0.2)',  // 塗りつぶしの色
@@ -39,16 +38,27 @@ export const getData = (labels: string[], registerCounts: number[],deleteCounts:
             text: 'Weekly Activity',  // タイトル
           },
           tooltip: {
-            mode: 'index',
+            mode: 'index' as const,
             intersect: false,
           },
         },
         scales: {
           x: {
-            type: 'category',
+            type: 'category' as const,
+            reverse: true,
+            ticks: {
+                maxRotation: 60,// ラベルの最大回転角度を45度に設定
+                minRotation: 60, // ラベルの最小回転角度を45度に設定
+              },
+              grid: {
+                display: false, // x軸のグリッド線を非表示
+              },
           },
           y: {
             beginAtZero: true,
+            grid: {
+                display: false, // x軸のグリッド線を非表示
+              },
           },
         },
       };

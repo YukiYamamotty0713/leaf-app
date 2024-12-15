@@ -5,7 +5,7 @@ interface WordData {
   id:number;
   word:string;
   definition:string;
-  m_part_of_speech:PartOfSpeech;
+  part_of_speech:PartOfSpeech;
 }
 
 interface PartOfSpeech{
@@ -51,7 +51,7 @@ const toggleWord = computed(() => {
       {{ data.word }}
     </div>
     <div class="part-of-speech">
-      {{ data?.m_part_of_speech?.name }}
+      {{ data?.part_of_speech?.name }}
     </div>
     <div class="definition"
           :class="descriptionClasses">

@@ -1,20 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref , Ref , computed } from 'vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import EnglishWordCard from '@/Molecules/EnglishWordCard.vue';
+import EnglishWordList from '@/Molecules/EnglishWordList.vue';
 import axios from 'axios';
 import CSVDownload from '@/Icons/CSVDownload.vue';
-
-interface PartOfSpeech{
-    id:number;
-    name:string;
-}
-interface MyWord {
-    id:number;
-    word:string;
-    definition:string;
-    part_of_speech:PartOfSpeech;
-}
+import { MyWord } from './interface.ts';
+import ShowTypeToggleButton from '@/Atoms/ShowTypeToggleButton.vue';
 
 const props = defineProps<{ 
             data:MyWord[]
@@ -83,6 +75,10 @@ function update_visible_data(id:number){
     }
 }
 
+const showType:Ref<string> = ref('card');
+const toggleShowType = () => {
+    showType.value = showType.value === 'card' ? 'list' : 'card'; // 値を代入
+};
 
 </script>
 
@@ -94,28 +90,50 @@ function update_visible_data(id:number){
             <p class="text-red-700">
                 {{ delete_result }}
             </p>
-        <div class="flex justify-end">
+
+        <div class="flex justify-between">
+            <show-type-toggle-button 
+            @click="toggleShowType"
+            />
             <CSVDownload 
               @click="download_csv"/>
         </div>
-        <div class="my-words-wrapper">
-            <transition-group 
-              name="fade">
+            <div 
+            v-if="showType === 'card'"
+            class="my-words-wrapper">
+                <transition-group 
+                name="fade">
+                    <div
+                    v-for="item in visible_data"
+                    :key="item.id">            
+                        <english-word-card 
+                            :data="item"
+                            @delete="post_delete_word"/>
+                    </div>
+                </transition-group>
+            </div>
+            <div
+            v-else-if="showType === 'list'"
+            class="my-words-list-wrapper"
+            >
                 <div
-                  v-for="item in visible_data"
-                  :key="item.id">            
-                    <english-word-card 
+                v-for="item in visible_data"
+                :key="item.id"> 
+                    <english-word-list 
                         :data="item"
                         @delete="post_delete_word"/>
-                </div>
-            </transition-group>
-        </div>
+                </div>    
+            </div>
     </authenticated-layout>
 </template>
 
 <style scoped>
 .my-words-wrapper {
   @apply bg-white rounded-[15px] my-3 p-4 shadow-lg font-bold grid grid-cols-3 gap-4;
+}
+
+.my-words-list-wrapper{
+    @apply bg-white rounded-[15px] my-3 p-4 shadow-lg font-bold;
 }
 
 /* 透明化とスライドのアニメーション */

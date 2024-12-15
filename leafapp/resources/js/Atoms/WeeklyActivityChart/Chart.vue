@@ -21,10 +21,9 @@ onMounted(() => {
   if (sample.value) {
     const ctx = sample.value.getContext('2d');
     const labels = props.weeklyActivity.days; // 日付のラベル
-    const activities:any = props.weeklyActivity.activities; // アクティビティのデータ（例: 登録数）
+    const activities:DailyActivities[]= props.weeklyActivity.activities; // アクティビティのデータ（例: 登録数）
     const registerCounts = activities.map((activity: DailyActivities) => activity.register); // 登録数のデータ
     const deleteCounts = activities.map((activity: DailyActivities) => activity.delete); // 削除数のデータ
-    console.log(activities);
 
     // グラフの描画
     new Chart(ctx, {
@@ -38,8 +37,8 @@ onMounted(() => {
 </script>
 <template>
     <div class="h-[400px] w-[730px] bg-slate-300 flex justify-center items-center rounded-[15px] relative">
-        <div class="h-[336px] w-[730px]">
-            <canvas ref="sample" class="h-full w-full"/>
+        <div class="h-[336px] w-[630px]">
+            <canvas ref="sample" class="h-full w-10/12"/>
         </div>
     </div>
 </template>
