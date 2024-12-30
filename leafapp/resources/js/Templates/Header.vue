@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import TitleText from '@/Atoms/TitleText.vue';
 
 import { Link } from '@inertiajs/vue3';

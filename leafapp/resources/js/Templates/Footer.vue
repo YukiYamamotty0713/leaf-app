@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { footerData } from '@/Texts/common.js';
 </script>
 <template>
