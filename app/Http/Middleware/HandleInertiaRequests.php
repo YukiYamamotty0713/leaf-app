@@ -34,6 +34,10 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'pusher' => [
+                'key' =>env("PUSHER_APP_KEY"),
+                'cluster' => env("PUSHER_APP_CLUSTER"),
+            ],
         ];
     }
 }
