@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('word'); // 単語
             $table->foreignId('user_id')->constrained(); // ユーザーID (外部キー)
             $table->text('definition')->nullable(); // 定義
-            $table->foreignId('part_of_speech_id')->nullable()->constrained(); // 品詞ID (外部キー、nullable)
+            $table->foreignId('part_of_speech_id')->nullable();
             $table->timestamps(); // created_at と updated_at カラム
         });
     }
