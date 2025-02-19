@@ -60,7 +60,10 @@ jobs:
 
       # 6. Herokuへの認証情報をGitに設定
       - name: Set Git credentials for Heroku
-        run: git config --global credential.helper store
+        run: | 
+          git config --global user.email "yuuki330110713@gmail.com"
+          git config --global user.name "YukiYamamotty0713"
+          git config --global credential.helper store
 
       # 7. Herokuにデプロイ
       - name: Deploy to Heroku
