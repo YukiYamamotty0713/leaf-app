@@ -46,7 +46,7 @@ const submit = () => {
         </div>
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="email" value="Email" />
+                <InputLabel for="email" value="メールアドレス" />
 
                 <TextInput
                     id="email"
@@ -62,7 +62,7 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+                <InputLabel for="password" value="パスワード" />
 
                 <TextInput
                     id="password"
@@ -76,7 +76,14 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
-            <div class="mt-4 flex items-center justify-end">
+            <div class="mt-4 flex items-center justify-between">
+                <Link
+                    id="register"
+                    href="/register"
+                    class="ms-4 text-black bg-accent text-white p-2 rounded-lg shadow-lg text-sm"
+                >
+                    新規登録
+                </Link>
 
 
                 <PrimaryButton
@@ -85,8 +92,11 @@ const submit = () => {
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
-                    Log in
+                    ログイン
+                
                 </PrimaryButton>
+
+
             </div>
         </form>
     </GuestLayout>

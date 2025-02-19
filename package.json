@@ -23,6 +23,7 @@
         "vue": "^3.4.0"
     },
     "dependencies": {
+        "@fortawesome/vue-fontawesome": "^3.0.8",
         "chart.js": "^4.4.7",
         "laravel-echo": "^2.0.0",
         "pusher-js": "^8.4.0",
