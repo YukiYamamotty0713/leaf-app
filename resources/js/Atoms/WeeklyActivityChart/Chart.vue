@@ -25,7 +25,6 @@ onMounted(() => {
     const registerCounts = activities.map((activity: DailyActivities) => activity.register); // 登録数のデータ
     const deleteCounts = activities.map((activity: DailyActivities) => activity.delete); // 削除数のデータ
 
-    // グラフの描画
     new Chart(ctx, {
       type: 'line',  // 折れ線グラフ
       data: getData(labels, registerCounts, deleteCounts),
