@@ -70,7 +70,7 @@ onMounted(() => {
 
 </script>
 <template>
-    <div class="h-[200px] w-[200px] bg-slate-300 flex justify-center items-center rounded-[15px] relative">
+    <div class="h-[200px] min-w-[200px] w-full bg-slate-300 flex justify-center items-center rounded-[15px] relative">
         <div class="h-[130px] w-[130px]">
             <canvas ref="sample" class="h-full w-full"/>
         </div>

@@ -29,11 +29,12 @@ console.log(props.registerWordsCounts);
 <template>
     <Head title="Dashboard" />
     <AuthenticatedLayout>
+        
             <primary-card>
                 <template #header>
                     📉Dashboard
                 </template>
-                <div class="flex flex-row justify-between">
+                <div class="flex flex-col space-y-4 md:space-y-0 md:space-x-4 md:flex-row justify-between">
                 <register-breakdown-chart
                 :counts="props.registerWordsCounts"
                 />

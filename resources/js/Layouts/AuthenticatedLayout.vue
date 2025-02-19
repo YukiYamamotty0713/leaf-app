@@ -41,7 +41,7 @@ const routes: Route[] = [
     </div>
 
     <div class="w-full flex justify-center min-h-screen py-6 font-gothic">
-        <main class="w-[780px]">
+        <main class="max-w-[780px] w-full mx-auto px-[15px]">
             <slot />
         </main>
     </div>

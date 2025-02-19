@@ -25,7 +25,7 @@ onMounted(() => {
 
 </script>
 <template>
-    <div class="h-[200px] w-[400px] bg-slate-300 flex justify-center items-center rounded-[15px] relative">
+    <div class="h-[200px] max-w-[400px] w-full bg-slate-300 flex justify-center items-center rounded-[15px] relative">
         <div class="h-[130px] w-[230px]">
             <canvas ref="sample" class="h-full w-full"/>
         </div>
