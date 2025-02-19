@@ -55,16 +55,16 @@ jobs:
           echo $HEROKU_API_KEY | heroku auth:token
 
       # 5. GitリモートにHerokuを設定
-      - name: Set Heroku remote URL
-        run: git remote add heroku https://git.heroku.com/pacific-castle-41954.git
+      - name: Set Heroku remote URL with API Key
+        run: |
+          git remote set-url heroku https://$HEROKU_API_KEY:@git.heroku.com/pacific-castle-41954.git
 
       # 6. Herokuへの認証情報をGitに設定
       - name: Set Git credentials for Heroku
-        run: | 
+        run: |
           git config --global user.email "yuuki330110713@gmail.com"
           git config --global user.name "YukiYamamotty0713"
           git config --global credential.helper store
-          echo "https://$HEROKU_API_KEY:@git.heroku.com" > ~/.git-credentials
 
       # 7. Herokuにデプロイ
       - name: Deploy to Heroku
