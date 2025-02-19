@@ -30,7 +30,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build 
+    needs: build
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -46,9 +46,8 @@ jobs:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: echo $HEROKU_API_KEY | heroku auth:token
 
-      # ここが重要な修正ポイント
-      - name: Add Heroku remote
-        run: heroku git:remote -a pacific-castle-41954
+      - name: Check Heroku app exists
+        run: heroku apps:info -a pacific-castle-41954
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
@@ -56,6 +55,11 @@ jobs:
         run: |
           git config --global user.email "yuuki330110713@gmail.com"
           git config --global user.name "YukiYamamotty0713"
+
+      - name: Add Heroku remote
+        run: heroku git:remote -a pacific-castle-41954
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
       - name: Deploy to Heroku
         run: git push heroku main
