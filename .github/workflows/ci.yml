@@ -30,7 +30,6 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -44,25 +43,36 @@ jobs:
       - name: Heroku Login
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: echo $HEROKU_API_KEY | heroku auth:token
+        run: |
+          heroku auth:token
+          heroku auth:whoami
 
       - name: Check Heroku app exists
         run: heroku apps:info -a pacific-castle-41954
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
-      # 5. GitリモートにHerokuを設定
-      - name: Set Heroku remote URL
-        run: git remote add heroku https://git.heroku.com/pacific-castle-41954.git
+      - name: Show Git Remote Before Setting
+        run: git remote -v
 
-      # 6. Herokuへの認証情報をGitに設定
+      - name: Set Heroku remote URL
+        run: |
+          git remote add heroku https://git.heroku.com/pacific-castle-41954.git || echo "Remote already exists"
+          git remote -v
+
       - name: Set Git credentials for Heroku
         run: | 
           git config --global user.email "yuuki330110713@gmail.com"
           git config --global user.name "YukiYamamotty0713"
           git config --global credential.helper 'store'
-          echo "https://$HEROKU_API_KEY@git.heroku.com" > ~/.git-credentials
+          echo "https://heroku:$HEROKU_API_KEY@git.heroku.com" > ~/.git-credentials
+          cat ~/.git-credentials
 
-      # 7. Herokuにデプロイ
+      - name: Show Git Status
+        run: git status
+
+      - name: Show Git Log
+        run: git log --oneline -n 5
+
       - name: Deploy to Heroku
-        run: git push heroku main
+        run: git push --verbose heroku main
