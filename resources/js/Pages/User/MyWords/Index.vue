@@ -116,6 +116,12 @@ const toggleShowType = () => {
             v-else-if="showType === 'list'"
             class="my-words-list-wrapper"
             >
+              <!-- テーブルヘッダー -->
+                <div class="flex justify-between items-center border-b-2 bg-gray-100 font-bold h-[40px] px-4">
+                    <div class="text-lg text-left w-4/12">Word</div>
+                    <div class="text-lg text-left w-4/12">Definition</div>
+                    <div class="text-lg text-right w-4/12">Actions</div>
+                </div>
                 <div
                 v-for="item in visible_data"
                 :key="item.id"> 

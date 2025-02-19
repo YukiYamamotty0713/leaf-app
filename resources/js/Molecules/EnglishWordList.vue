@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 
-// 型定義
 interface PartOfSpeech {
   id: number;
   name: string;
@@ -14,54 +13,68 @@ interface WordData {
   part_of_speech: PartOfSpeech;
 }
 
-// Propsの定義
 const props = defineProps<{
   data: WordData;
 }>();
 
-// 状態管理
 const showDescription = ref<boolean>(false);
 
-// イベントの型定義
 const emit = defineEmits<{
   (event: "delete", id: number): void;
 }>();
 
-// 削除機能
 const deleteWord = () => {
   emit("delete", props.data.id);
 };
 
-// 説明の表示切替
+// 音声読み上げ機能
+const speakWord = () => {
+  if ('speechSynthesis' in window) {
+    const utterance = new SpeechSynthesisUtterance(props.data.word);
+    window.speechSynthesis.speak(utterance);
+  } else {
+    alert('Text-to-speech is not supported in this browser.');
+  }
+};
+
+
+
 const toggleDescription = () => {
   showDescription.value = !showDescription.value;
 };
 
-// 説明エリアのクラスを動的に変更
-const descriptionClasses = computed(() => ({
-  'toggle-description': showDescription.value,
-  'bg-black text-black': !showDescription.value,
-}));
-
-// 説明の表示/非表示テキストを切り替え
-const toggleWordText = computed(() => (showDescription.value ? "Hide" : "Show"));
 </script>
 
 <template>
-  <div class="flex justify-between items-center border-b-2 hover:bg-slate-100 h-[40px]">
-    <div class="font-bold text-lg text-left w-4/12">{{ props.data.word }}</div>
-    <div class="text-sm flex justify-start w-4/12">{{ props.data.definition }}</div>
+
+
+  <!-- データ行 -->
+  <div class="flex justify-between items-center border-b-2 hover:bg-slate-100 h-[40px] px-4">
+    <div class="font-bold text-lg text-left w-4/12">{{ props.data.word }}
+      <button 
+        @click="speakWord"
+        class="text-gray-500 hover:text-blue-500 transition-colors"
+        title="Pronounce"
+      >
+        🔈
+      </button>
+    </div>
+
+    <div class="text-sm flex items-center justify-start w-4/12">
+      <span class="mr-2">{{ props.data.definition }}</span>
+
+    </div>
     <div class="w-4/12 flex justify-end">
       <button
         @click="deleteWord"
-        class="text-black hover:cursor-pointer hover:cursorpointer"
+        class="text-black hover:cursor-pointer hover:text-red-500 transition-colors"
+        title="Delete"
       >
         ✅
-    </button>
+      </button>
     </div>
   </div>
 </template>
-
 <style scoped>
 /* 基本的なスタイル */
 .card {
