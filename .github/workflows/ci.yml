@@ -28,51 +28,33 @@ jobs:
         run: |
           composer install --no-progress --prefer-dist
 
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install Heroku CLI
-        run: curl https://cli-assets.heroku.com/install.sh | sudo bash
-
-      - name: Verify Heroku CLI
-        run: heroku --version
-
-      - name: Heroku Login
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: |
-          heroku auth:token
-          heroku auth:whoami
-
-      - name: Check Heroku app exists
-        run: heroku apps:info -a pacific-castle-41954
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-
-      - name: Show Git Remote Before Setting
-        run: git remote -v
-
-      - name: Set Heroku remote URL
-        run: |
-          git remote add heroku https://git.heroku.com/pacific-castle-41954.git || echo "Remote already exists"
-          git remote -v
-
-      - name: Set Git credentials for Heroku
-        run: | 
-          git config --global user.email "yuuki330110713@gmail.com"
-          git config --global user.name "YukiYamamotty0713"
-          git config --global credential.helper 'store'
-          echo "https://heroku:$HEROKU_API_KEY@git.heroku.com" > ~/.git-credentials
-          cat ~/.git-credentials
-
-      - name: Show Git Status
-        run: git status
-
-      - name: Show Git Log
-        run: git log --oneline -n 5
-
-      - name: Deploy to Heroku
-        run: git push --verbose heroku main
+          deploy:
+            needs: build
+            runs-on: ubuntu-latest
+        
+            steps:
+              - name: Checkout code
+                uses: actions/checkout@v2
+        
+              - name: Install Heroku CLI
+                run: curl https://cli-assets.heroku.com/install.sh | sudo bash
+        
+              - name: Authenticate Heroku CLI
+                env:
+                  HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+                run: |
+                  echo "machine git.heroku.com login YukiYamamotty0713 password $HEROKU_API_KEY" > ~/.netrc
+                  chmod 600 ~/.netrc
+                  heroku auth:token
+        
+              - name: Set Heroku git remote
+                env:
+                  HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+                run: |
+                  heroku git:remote -a pacific-castle-41954
+        
+              - name: Configure Git authentication
+                run: git config --global credential.helper cache
+        
+              - name: Deploy to Heroku
+                run: git push heroku main
