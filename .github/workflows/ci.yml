@@ -35,6 +35,8 @@ jobs:
             steps:
               - name: Checkout code
                 uses: actions/checkout@v2
+                with:
+                  fetch-depth: 0 #完全な履歴をFetch
         
               - name: Install Heroku CLI
                 run: curl https://cli-assets.heroku.com/install.sh | sudo bash
