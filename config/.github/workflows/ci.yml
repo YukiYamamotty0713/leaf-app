@@ -1,0 +1,59 @@
+name: PHP CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main  # mainブランチへのpushをトリガー
+  pull_request:
+    branches:
+      - main  # mainブランチへのPRをトリガー
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # 最新のUbuntu環境で実行
+
+    steps:
+      # 1. コードのチェックアウト
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # 2. PHPのセットアップ
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'  # 使用するPHPのバージョン（必要に応じて変更）
+
+      # 3. Composerで依存関係のインストール
+      - name: Install dependencies
+        run: |
+          composer install --no-progress --prefer-dist
+
+      # 4. PHPUnitの実行
+      
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build  # buildジョブが成功した場合にのみデプロイを実行
+
+    steps:
+      # 1. コードのチェックアウト
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # 2. Heroku CLIのインストール
+      - name: Install Heroku CLI
+        run: curl https://cli-assets.heroku.com/install.sh | sh
+
+      # 3. Heroku APIキーを設定
+      - name: Heroku Login
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+          echo $HEROKU_API_KEY | heroku auth:token
+
+      # 4. GitリモートにHerokuを追加
+      - name: Add Heroku remote
+        run: git remote add heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+
+      # 5. Herokuにデプロイ
+      - name: Deploy to Heroku
+        run: git push heroku main
