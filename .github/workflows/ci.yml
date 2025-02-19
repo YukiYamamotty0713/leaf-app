@@ -28,7 +28,7 @@ jobs:
         run: |
           composer install --no-progress --prefer-dist
 
-          deploy:
+  deploy:
             needs: build
             runs-on: ubuntu-latest
         
