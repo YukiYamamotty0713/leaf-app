@@ -14,8 +14,9 @@
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
-    # Redirect to the public directory for the front controller
+    # Ensure to only redirect to /public once and avoid infinite loops
     RewriteCond %{REQUEST_URI} !^/public/
+    RewriteCond %{REQUEST_URI} !^/public/.*
     RewriteRule ^(.*)$ /public/$1 [L]
 
     # Send Requests To Front Controller...
