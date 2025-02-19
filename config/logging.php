@@ -54,17 +54,17 @@ return [
 
         'stack' => [
             'driver' => 'stack',
-            'channels' => explode(',', env('LOG_STACK', 'single')),
+            'channels' => ['single'], // 必要に応じて他のチャンネルを追加
             'ignore_exceptions' => false,
         ],
 
         'single' => [
-            'driver' => 'erorrlog',
-            'path' => storage_path('logs/laravel.log'),
-            'level' => env('LOG_LEVEL', 'debug'),
+            'driver' => 'single', // erorrlog を single に修正
+            'path' => storage_path('logs/laravel.log'), // パスを確認
+            'level' => env('LOG_LEVEL', 'debug'), // 環境変数を確認
             'replace_placeholders' => true,
         ],
-
+        
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
