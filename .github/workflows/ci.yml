@@ -55,9 +55,14 @@ jobs:
           echo $HEROKU_API_KEY | heroku auth:token
 
       # 5. GitリモートにHerokuを設定
+      - name: Add Heroku remote
+        run: git remote add heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+
+      # 6. リモートURLの設定（追加後）
       - name: Set Heroku remote URL
         run: git remote set-url heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
 
-      # 6. Herokuにデプロイ
+
+      # 7. Herokuにデプロイ
       - name: Deploy to Heroku
         run: git push heroku main
