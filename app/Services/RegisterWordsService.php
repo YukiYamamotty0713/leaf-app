@@ -27,7 +27,7 @@ class RegisterWordsService
 
     public function get()
     {   
-        $title = "ここでは自分の覚えたい英単語を登録できます";
+        $title = "あなたの覚えたい英単語を登録してください。";
         $mPartOfSpeech = $this->MPartOfSpeechRepositoryInterface->get();
         $data = [
             "title" => $title,

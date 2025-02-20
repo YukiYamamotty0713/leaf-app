@@ -19,24 +19,31 @@ const visible_data = ref<WordData[]>(props.data)
 const API_ENDPOINT = '/api/words/';
 const CSV_FILENAME = 'data.csv';
 
-console.log(props.data);
+
+const toastMessage = ref<string | null>(null); // トーストメッセージ
+const showToast = (message: string) => {
+    toastMessage.value = message;
+    setTimeout(() => {
+        toastMessage.value = null; // 3秒後にトーストを消す
+    }, 3000);
+};
+
 /**
  * 削除処理を行い、成功したらupdate_vieible_dataを呼び出す。
  * 失敗したらコンソールにエラーを表示する。
  * @param {number} id
  * @returns void
  */
-const post_delete_word = async (id:number) => 
-{
+ const post_delete_word = async (id: number) => {
     try {
         await axios.delete(`${API_ENDPOINT}${id}`);
         update_visible_data(id);
-        delete_result.value = '✅おめでとうございます！この単語を覚えたので、リストから退避しました。';
-    } catch (error:any) {
+        showToast('おめでとうございます！この単語を覚えたので、リストから退避しました。'); // トーストを表示
+    } catch (error: any) {
         console.error(error);
-        delete_result.value = '退避に失敗しました';
+        showToast('退避に失敗しました'); // トーストを表示
     }
-}
+};
 
 const delete_result = ref<string>(''); // 削除結果
 
@@ -86,7 +93,10 @@ const toggleShowType = () => {
 
 <template>
     <authenticated-layout>
-        <h2 class="py-4 text-lg bg-white p-2 rounded-lg my-3">
+        <h2 
+        class="py-4 text-lg bg-white p-2 rounded-lg my-3"
+        @click="showToast('📖あなたの登録した単語帳が登録されます。覚えた単語は✅をクリックしてください。')"
+        >
             📖あなたの登録した単語帳が登録されます。<br>
             覚えた単語は✅をクリックしてください。
         </h2>
@@ -136,7 +146,10 @@ const toggleShowType = () => {
             </div>
     </authenticated-layout>
 
-
+    <!-- トーストメッセージ -->
+    <div v-if="toastMessage" class="toast">
+            {{ toastMessage }}
+        </div>
 </template>
 
 <style scoped>
@@ -158,5 +171,9 @@ const toggleShowType = () => {
 }
 .fade-leave-to {
   @apply opacity-0 translate-y-4;
+}
+
+.toast{
+    @apply fixed top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r to-blue-200 from-blue-300 text-slate-800 px-6 py-3 rounded-md z-50 min-w-[0px]
 }
 </style>

@@ -15,8 +15,8 @@ const form = useForm<WordData>({
     id: null,
     name: '選択してください'
   }, // 品詞
-    exampleSentence: "This is an example sentence.",
-    note: "This is a note about the word."
+    exampleSentence: "",
+    note: "",
 });
 
 
@@ -170,7 +170,7 @@ const isAlertVisible = ref<boolean>(false); // アラートの表示状態
 
 /* アラート用のスタイル */
 .alert {
-    @apply fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-800 text-white text-center py-2 px-4 rounded-md shadow-lg;
+    @apply fixed top-4 left-1/2 transform -translate-x-1/2 bg-blue-300 text-white text-center py-2 px-4 rounded-md shadow-lg min-w-[350px];
     z-index: 50;
     animation: fadeIn 0.5s ease-in-out;
 }

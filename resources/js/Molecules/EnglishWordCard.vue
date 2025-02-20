@@ -56,8 +56,7 @@ const showDetailsInModal = (MyWord: MyWord) => {
         <div class="word">
             {{ data.word }}
         </div>
-        <div class="part-of-speech">
-            {{ data?.PartOfSpeech?.name }}  </div>
+
         <div class="definition" :class="descriptionClasses">
             {{ data.definition }}
         </div>
@@ -87,7 +86,7 @@ const showDetailsInModal = (MyWord: MyWord) => {
 }
 
 .word {
-  @apply text-sm font-bold text-light pb-4;
+  @apply text-sm font-bold text-light pb-1;
 }
 
 .part-of-speech {
@@ -95,7 +94,7 @@ const showDetailsInModal = (MyWord: MyWord) => {
 }
 
 .definition {
-  @apply text-sm text-black rounded-md transition-all duration-500 w-full h-[70px] py-2 pl-2;
+  @apply text-sm text-black rounded-md transition-all duration-500 w-full h-[70px] pl-2;
 }
 
 .overlay {
@@ -103,7 +102,7 @@ const showDetailsInModal = (MyWord: MyWord) => {
 }
 
 .delete_button {
-  @apply absolute top-1 right-1;
+  @apply absolute top-3 right-3;
   @apply text-base text-light cursor-pointer hover:top-2 transition-all duration-300;
 }
 

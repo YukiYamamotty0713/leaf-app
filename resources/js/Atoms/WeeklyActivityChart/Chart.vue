@@ -20,8 +20,12 @@ const sample = ref(null);
 onMounted(() => {
   if (sample.value) {
     const ctx = sample.value.getContext('2d');
-    const labels = props.weeklyActivity.days; // 日付のラベル
-    const activities:DailyActivities[]= props.weeklyActivity.activities; // アクティビティのデータ（例: 登録数）
+    // 年を省いた日付ラベルを生成
+    const labels = props.weeklyActivity.days.map(date => {
+      const parts = date.split('-'); // 年月日を分割
+      return `${parts[1]}/${parts[2]}`; // 月/日 の形式で返す
+    });
+    const activities: DailyActivities[] = props.weeklyActivity.activities; // アクティビティのデータ（例: 登録数）
     const registerCounts = activities.map((activity: DailyActivities) => activity.register); // 登録数のデータ
     const deleteCounts = activities.map((activity: DailyActivities) => activity.delete); // 削除数のデータ
 
