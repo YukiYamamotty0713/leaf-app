@@ -80,7 +80,7 @@ const submit = () => {
                 <Link
                     id="register"
                     href="/register"
-                    class="ms-4 text-black bg-accent text-white p-2 rounded-lg shadow-lg text-sm"
+                    class="bg-accent text-white p-2 rounded-lg shadow-lg text-sm"
                 >
                     新規登録
                 </Link>
@@ -88,7 +88,6 @@ const submit = () => {
 
                 <PrimaryButton
                     id="login"
-                    class="ms-4"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >

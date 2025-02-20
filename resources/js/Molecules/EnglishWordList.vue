@@ -1,18 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-
-interface PartOfSpeech {
-  id: number;
-  name: string;
-}
-
-interface WordData {
-  id: number;
-  word: string;
-  definition: string;
-  part_of_speech: PartOfSpeech;
-}
-
+import { WordData } from "@/Types/Interface";
 const props = defineProps<{
   data: WordData;
 }>();
@@ -50,7 +38,7 @@ const toggleDescription = () => {
 
   <!-- データ行 -->
   <div class="flex justify-between items-center border-b-2 hover:bg-slate-100 h-[40px] px-4">
-    <div class="font-bold text-lg text-left w-4/12">{{ props.data.word }}
+    <div class="font-bold text-sm text-left w-6/12">{{ props.data.word }}
       <button 
         @click="speakWord"
         class="text-gray-500 hover:text-blue-500 transition-colors"
@@ -60,11 +48,11 @@ const toggleDescription = () => {
       </button>
     </div>
 
-    <div class="text-sm flex items-center justify-start w-4/12">
+    <div class="text-sm flex items-center justify-start w-5/12">
       <span class="mr-2">{{ props.data.definition }}</span>
 
     </div>
-    <div class="w-4/12 flex justify-end">
+    <div class="w-1/12 flex justify-end">
       <button
         @click="deleteWord"
         class="text-black hover:cursor-pointer hover:text-red-500 transition-colors"

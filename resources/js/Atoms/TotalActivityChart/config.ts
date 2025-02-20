@@ -9,7 +9,7 @@ export const getData:object = (
 ) => {
     return {
     labels: [
-        "登録数", "スタッシュ数"
+        "登録数", "達成数"
     ],
     datasets: [
         {

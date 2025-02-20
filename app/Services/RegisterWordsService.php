@@ -6,7 +6,6 @@ use App\Repositories\MPartOfSpeechRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Repositories\RegisterWordsRepositoryInterface;
 use App\Repositories\DailyActivityRepositoryInterface;
-use Illuminate\Support\Facades\Auth;
 use App\Services\CommonService\AuthService;
 
 class RegisterWordsService
@@ -44,7 +43,9 @@ class RegisterWordsService
            "word" => $request->word,
            "user_id" => $this->AuthService->get_id(),
            "definition"=> $request->definition,
-           "part_of_speech_id" => $request->partOfSpeech,
+           "part_of_speech_id" => $request->PartOfSpeech['id'],
+            "example_sentence" => $request->exampleSentence,
+            "note" => $request->note
         ]);
 
 

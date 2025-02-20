@@ -7,18 +7,19 @@ import axios from 'axios';
 import CSVDownload from '@/Icons/CSVDownload.vue';
 import { MyWord } from './interface.ts';
 import ShowTypeToggleButton from '@/Atoms/ShowTypeToggleButton.vue';
+import { WordData } from '@/Types/Interface';
 
 const props = defineProps<{ 
-            data:MyWord[]
+            data:WordData[]
             }>();
 
 //コピーを作成
-const visible_data = ref<MyWord[]>(props.data)
+const visible_data = ref<WordData[]>(props.data)
 
 const API_ENDPOINT = '/api/words/';
 const CSV_FILENAME = 'data.csv';
 
-
+console.log(props.data);
 /**
  * 削除処理を行い、成功したらupdate_vieible_dataを呼び出す。
  * 失敗したらコンソールにエラーを表示する。
@@ -30,17 +31,17 @@ const post_delete_word = async (id:number) =>
     try {
         await axios.delete(`${API_ENDPOINT}${id}`);
         update_visible_data(id);
-        delete_result.value = '✅おめでとうございます！リストからスタッシュしました。';
+        delete_result.value = '✅おめでとうございます！この単語を覚えたので、リストから退避しました。';
     } catch (error:any) {
         console.error(error);
-        delete_result.value = 'スタッシュに失敗しました';
+        delete_result.value = '退避に失敗しました';
     }
 }
 
 const delete_result = ref<string>(''); // 削除結果
 
 function update_visible_data(id:number){
-    visible_data.value = visible_data.value.filter((item:MyWord) => item.id !== id);
+    visible_data.value = visible_data.value.filter((item:WordData) => item.id !== id);
 }
 
 /**
@@ -48,6 +49,7 @@ function update_visible_data(id:number){
  * @return void
  */
  async function download_csv() {
+
     try {
         const response = await axios.get('download_csv', {
             responseType: 'blob' // バイナリデータを扱うための設定
@@ -85,7 +87,8 @@ const toggleShowType = () => {
 <template>
     <authenticated-layout>
         <h2 class="py-4 text-lg bg-white p-2 rounded-lg my-3">
-            📖ここには自分が登録した単語帳が入ります 
+            📖あなたの登録した単語帳が登録されます。<br>
+            覚えた単語は✅をクリックしてください。
         </h2>
             <p class="text-red-700">
                 {{ delete_result }}
@@ -105,7 +108,8 @@ const toggleShowType = () => {
                 name="fade">
                     <div
                     v-for="item in visible_data"
-                    :key="item.id">            
+                    :key="item.id"
+                    class="flex justify-center items-center">            
                         <english-word-card 
                             :data="item"
                             @delete="post_delete_word"/>
@@ -118,9 +122,9 @@ const toggleShowType = () => {
             >
               <!-- テーブルヘッダー -->
                 <div class="flex justify-between items-center border-b-2 bg-gray-100 font-bold h-[40px] px-4">
-                    <div class="text-lg text-left w-4/12">Word</div>
-                    <div class="text-lg text-left w-4/12">Definition</div>
-                    <div class="text-lg text-right w-4/12">Actions</div>
+                    <div class="text-sm text-left w-6/12">単語</div>
+                    <div class="text-sm text-left w-5/12">説明</div>
+                    <div class="text-xs text-right w-1/12">達成</div>
                 </div>
                 <div
                 v-for="item in visible_data"
@@ -131,11 +135,14 @@ const toggleShowType = () => {
                 </div>    
             </div>
     </authenticated-layout>
+
+
 </template>
 
 <style scoped>
 .my-words-wrapper {
-  @apply bg-white rounded-[15px] my-3 p-4 shadow-lg font-bold grid grid-cols-3 gap-4;
+  @apply bg-white rounded-[15px] my-3 px-4 py-8 shadow-lg font-bold 
+         grid grid-cols-2 lg:grid-cols-3 gap-4;
 }
 
 .my-words-list-wrapper{

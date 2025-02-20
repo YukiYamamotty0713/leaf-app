@@ -17,7 +17,7 @@ export const getData = (labels: string[], registerCounts: number[],deleteCounts:
           tension: 0.4,  // 曲線の滑らかさ
         },
         {
-          label: 'スタッシュ数',  // ラベル
+          label: '達成数',  // ラベル
           data: deleteCounts,     // 活動データ
           borderColor: 'rgb(255, 99, 132)',  // 線の色
           backgroundColor: 'rgba(255, 99, 132, 0.2)',  // 塗りつぶしの色

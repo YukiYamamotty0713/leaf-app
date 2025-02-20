@@ -2,28 +2,21 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
-
-/**
- * 品詞
- */
-interface partOfSpeech{
-    id:number,
-    name:string,
-}
-
-interface WordForm {
-  word: string; // 英単語
-  definition: string; // 説明
-  partOfSpeech: partOfSpeech; // 品詞
-}
-
+import { WordData, PartOfSpeech } from '@/Types/Interface';
 /**
  * フォームの初期値
  */
-const form = useForm<WordForm>({
+const form = useForm<WordData>({
+  id:0,
   word: '', // 英単語
   definition: '', // 説明
-  partOfSpeech: {} as partOfSpeech,
+  PartOfSpeechId: null, // partOfSpeechId を追加
+  PartOfSpeech: {
+    id: null,
+    name: '選択してください'
+  }, // 品詞
+    exampleSentence: "This is an example sentence.",
+    note: "This is a note about the word."
 });
 
 
@@ -40,7 +33,7 @@ function resetForm():void{
 interface Props {
     data: {
     title: string;
-    mPartOfSpeech: partOfSpeech[];
+    mPartOfSpeech: PartOfSpeech[];
   };
 }
 
@@ -62,7 +55,6 @@ const isAlertVisible = ref<boolean>(false); // アラートの表示状態
     }
   });
 };
-
 
 /**
  * アラートを表示する
@@ -101,7 +93,7 @@ const isAlertVisible = ref<boolean>(false); // アラートの表示状態
             <input 
                 v-model="form.word" 
                 type="text" 
-                placeholder="apple" 
+                placeholder="word" 
                 class="rounded-md w-full" 
             />
             <p class="text-red-700">
@@ -111,7 +103,7 @@ const isAlertVisible = ref<boolean>(false); // アラートの表示状態
             <input 
                 v-model="form.definition" 
                 type="text" 
-                placeholder="りんご" 
+                placeholder="単語を入力..." 
                 class="rounded-md w-full" 
             />
             <p class="text-red-700">
@@ -121,18 +113,38 @@ const isAlertVisible = ref<boolean>(false); // アラートの表示状態
                 品詞
             </label>
             <select 
-            v-model="form.partOfSpeech" 
-            class="rounded-md w-full">
+            v-model="form.PartOfSpeech" 
+            class="rounded-md w-full"
+            >
+                <option value="null">選択してください</option>
                 <option 
-                  v-for="partOfSpeech in data.mPartOfSpeech" 
-                  :value="partOfSpeech.id"
-                  >
+                    v-for="partOfSpeech in data.mPartOfSpeech" 
+                    :key="partOfSpeech.id"
+                    :value="partOfSpeech"
+                >
                     {{ partOfSpeech.name }}
                 </option>
             </select>
             <p class="text-red-700">
-                {{ form.errors.partOfSpeech }}
+                {{ form.errors.PartOfSpeech }}
             </p>
+
+            <label>📝例文</label>
+            <textarea 
+              v-model="form.exampleSentence" 
+              placeholder="例文" 
+              class="rounded-md w-full min-h-[150px] max-h-[200px]"
+              >
+            </textarea>
+
+            <label>📒備考</label>
+            <textarea 
+              v-model="form.note" 
+              placeholder="備考" 
+              class="rounded-md w-full min-h-[150px] max-h-[200px]"
+              >
+            </textarea>
+
             <button 
               class="submit-button" 
               type="button" 

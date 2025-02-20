@@ -35,9 +35,7 @@ onMounted(() => {
 
 </script>
 <template>
-    <div class="h-[400px] max-w-[730px] w-full bg-slate-300 flex justify-center items-center rounded-[15px] relative overflow-x-scroll">
-        <div class="h-[336px] max-w-[630px]">
-            <canvas ref="sample" class="h-full w-10/12"/>
-        </div>
+    <div class="max-w-[730px] w-full max-h-[400px] bg-slate-300 flex justify-start items-start rounded-[15px] relative overflow-x-scroll p-4">
+      <canvas ref="sample" class="min-h-10/12 w-10/12"/>
     </div>
 </template>
