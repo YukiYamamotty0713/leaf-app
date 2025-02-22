@@ -38,7 +38,7 @@ const showToast = (message: string) => {
     try {
         await axios.delete(`${API_ENDPOINT}${id}`);
         update_visible_data(id);
-        showToast('おめでとうございます！この単語を覚えたので、リストから退避しました。'); // トーストを表示
+        showToast('達成した単語はリストから削除されます。'); // トーストを表示
     } catch (error: any) {
         console.error(error);
         showToast('退避に失敗しました'); // トーストを表示

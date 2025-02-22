@@ -4,7 +4,7 @@
       <button @click="speakWord" :disabled="isSpeakingWord" class="text-slate-500 hover:text-slate-700 text-2xl" v-if="wordDetails">
         🔊
       </button>  
-    <h2 class="text-lg font-extrabold text-slate-800 text-3xl">{{ wordDetails.word }}</h2>
+    <h2 class="font-extrabold text-slate-800 text-3xl">{{ wordDetails.word }}</h2>
 
     </div>
     <div class="w-full">
@@ -53,6 +53,8 @@ const speakWord = () => {
   if (props.wordDetails) {
     isSpeakingWord.value = true;
     const utterance = new SpeechSynthesisUtterance(props.wordDetails.word);
+    //英語で読み上げるように
+    utterance.lang = 'en-US';
     utterance.onend = () => {
       isSpeakingWord.value = false;
     };
@@ -64,6 +66,8 @@ const speakExample = () => {
   if (props.wordDetails && props.wordDetails.example_sentence) {
     isSpeakingExample.value = true;
     const utterance = new SpeechSynthesisUtterance(props.wordDetails.example_sentence);
+    //英語で読み上げるように
+    utterance.lang = 'en-US';
     utterance.onend = () => {
       isSpeakingExample.value = false;
     };

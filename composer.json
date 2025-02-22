@@ -6,6 +6,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "google/cloud-ai-platform": "^1.18",
+        "guzzlehttp/guzzle": "^7.9",
         "inertiajs/inertia-laravel": "^2.0",
         "laravel/framework": "^11.9",
         "laravel/sanctum": "^4.0",

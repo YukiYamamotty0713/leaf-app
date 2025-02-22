@@ -9,4 +9,9 @@ class MPartOfSpeechRepository implements MPartOfSpeechRepositoryInterface
     {
         return MPartOfSpeech::all();
     }
+
+    public function getById(int $id) : String
+    {
+        return MPartOfSpeech::find($id)->name;
+    }
 }

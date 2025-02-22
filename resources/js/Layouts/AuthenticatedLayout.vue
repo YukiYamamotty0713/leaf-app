@@ -2,24 +2,11 @@
 import Header from '@/Templates/Header.vue';
 import Footer from '@/Templates/Footer.vue';
 import NavLink from '@/Components/NavLink.vue';
+import { routes } from './menus';
+import { usePage } from '@inertiajs/vue3';
 
-/**
- * ルートインターフェースを定義する
- * @parmas title:タイトル
- * @parmas route:ルート定義
- */
-interface Route {
-    title: string;
-    route: string; //route('hogehoge')
-}
-
-/**
- */
-const routes: Route[] = [
-    { title: "ダッシュボード", route: 'dashboard.index'},
-    { title: "単語を登録", route: 'register-words.index'},
-    { title: "マイ単語帳", route: 'mywords.index' },
-]
+const page = usePage();
+const pageroute:any = page.props.route;
 </script>
 
 <template>
@@ -34,6 +21,7 @@ const routes: Route[] = [
             <nav-link 
             :href="route(item.route)"
             class="hover:text-white px-3 py-2 text-sm font-medium"
+            :active="pageroute.name === item.route"
             >
                 {{ item.title }}
             </nav-link>

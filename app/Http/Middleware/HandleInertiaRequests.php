@@ -38,6 +38,11 @@ class HandleInertiaRequests extends Middleware
                 'key' =>env("PUSHER_APP_KEY"),
                 'cluster' => env("PUSHER_APP_CLUSTER"),
             ],
+            //現在のページのroute名を取得
+            'route' =>  [
+                'name' => $request->route()->getName(),
+                'href' => $request->route()->uri(),
+            ],
         ];
     }
 }

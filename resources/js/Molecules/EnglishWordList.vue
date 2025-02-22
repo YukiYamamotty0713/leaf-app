@@ -19,6 +19,7 @@ const deleteWord = () => {
 const speakWord = () => {
   if ('speechSynthesis' in window) {
     const utterance = new SpeechSynthesisUtterance(props.data.word);
+    utterance.lang = 'en-US';
     window.speechSynthesis.speak(utterance);
   } else {
     alert('Text-to-speech is not supported in this browser.');

@@ -36,4 +36,36 @@ class RegisterWordsController extends Controller
             "data" => $this->RegisterWordsService->get(),
         ]);      
     }
+
+    /**
+     * GeminiAPIよりワードから例文を提案
+     */
+    public function suggest(Request $request)
+    {
+       //$response = $this->getSuggestedMock();
+       $response = $this->RegisterWordsService->suggestExampleSentence($request);
+       return response()->json($response);
+    }
+
+
+    /**
+     * 提案データが以下のとおりである
+    *0:{example: 'The Gemini constellation is easily recognizable in the night sky during the winter months.'}
+    *1:{example: "My astrological sign is Gemini, which means I'm said to be communicative and adaptable."}
+    *2:{example: "NASA's Project Gemini helped pave the way for the Apollo moon landings."}
+    */
+    private function getSuggestedMock()
+    {
+        return [
+            [
+                "example" => "The Gemini constellation is easily recognizable in the night sky during the winter months."
+            ],
+            [
+                "example" => "My astrological sign is Gemini, which means I'm said to be communicative and adaptable."
+            ],
+            [
+                "example" => "NASA's Project Gemini helped pave the way for the Apollo moon landings."
+            ]
+        ];
+    }
 }

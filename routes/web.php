@@ -13,21 +13,16 @@ Route::middleware('auth')->group(function () {
     Route::get('dashboard',[DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('my-words', [MyWordsController::class, 'index'])->name('mywords.index');
     Route::get('download_csv', [MyWordsController::class, 'download_csv'])->name('my_words.download_csv');
-    Route::delete('api/words/{id}', [MyWordsController::class, 'delete'])->name('mywords.delete');
 
-    Route::get('websocket', function () {
-        return Inertia::render('User/WebSocket/Index');
-    });
 
-    Route::post('/send-message', function (Request $request) {
-        $socketId = $request->input('socket_id'); // フロントエンドから送信された socket_id を受け取る
-        broadcast(new MessageSent($request->message, $socketId));
-        return response()->json(['status' => 'Message sent!']);
-    });
 
     Route::get('words-question', [WordsQuestionController::class, 'index'])->name('words-question.index'); 
     Route::get('register-words', [RegisterWordsController::class, 'index'])->name('register-words.index');
     Route::post('register-words', [RegisterWordsController::class, 'store'])->name('register-words.store');
+
+    Route::delete('api/words/{id}', [MyWordsController::class, 'delete'])->name('mywords.delete');
+    Route::post('api/suggest', [RegisterWordsController::class, 'suggest'])->name('register-words.suggest');
+
 });
 
 require __DIR__.'/auth.php';
