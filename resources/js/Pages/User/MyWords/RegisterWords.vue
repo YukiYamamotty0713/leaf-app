@@ -158,7 +158,6 @@ function selectExampleSentence(sentence: string) {
         ✏品詞
       </label>
       <select v-model="form.PartOfSpeech" class="rounded-md w-full">
-        <option value="null">選択してください</option>
         <option v-for="partOfSpeech in data.mPartOfSpeech" :key="partOfSpeech.id" :value="partOfSpeech">
           {{ partOfSpeech.name }}
         </option>
