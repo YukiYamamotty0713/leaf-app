@@ -16,11 +16,11 @@ const pageroute:any = page.props.route;
             📚～苦手な単語を、得意な一枚に～🖊
         </p>
     </div>
-    <div class="flex flex-row justify-center items-center gap-x-4">
+    <div class="flex flex-row justify-center items-center overflow-x-scroll">
         <div v-for="item in routes" class="bg-primary">
             <nav-link 
             :href="route(item.route)"
-            class="hover:text-white px-3 py-2 text-sm font-medium"
+            class="hover:text-white px-2 py-2 text-sm font-medium"
             :active="pageroute.name === item.route"
             >
                 {{ item.title }}

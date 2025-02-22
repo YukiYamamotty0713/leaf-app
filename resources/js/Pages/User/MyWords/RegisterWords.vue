@@ -93,7 +93,7 @@ function showAlert(message: string): void {
  * 例文を提案する
  * @returns void
  */
-async function sugegstExampleSentence() {
+async function suggestExampleSentence() {
   isLoading.value = true;
   exampleSentenceSuggestions.value = []; // Clear previous suggestions
   try {

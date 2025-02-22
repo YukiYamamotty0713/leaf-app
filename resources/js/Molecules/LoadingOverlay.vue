@@ -14,7 +14,7 @@ const props = defineProps<Props>();
       <div class="loading-spinner">
         <!-- CSS スピナー or 画像スピナー -->
       </div>
-      <div class="loading-message">例文を抽出しています...</div>
+      <div class="loading-message">抽出しています...</div>
     </div>
   </div>
 </template>

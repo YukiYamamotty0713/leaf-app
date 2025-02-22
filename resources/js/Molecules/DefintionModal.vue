@@ -34,13 +34,14 @@ function selectDefinition(definition: string, partOfSpeechId: number, partOfSpee
 
 <template>
   <div v-if="isOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-    <div class="bg-white rounded-lg p-6 w-1/2">
+    <div class="bg-white rounded-lg p-6 w-full max-w-2xl">
       <h2 class="text-lg font-semibold mb-4">最も適切な説明を選択してください</h2>
       <ul class="space-y-2">
         <li v-for="(definition, index) in definitions" :key="index"
-          class="p-2 border rounded cursor-pointer hover:bg-gray-100"
+          class="p-2 border rounded cursor-pointer hover:bg-gray-100 flex justify-between items-center"
           @click="selectDefinition(definition.definition, definition.partOfSpeech.id, definition.partOfSpeech.name)">
-          {{ definition.definition }} ({{ definition.partOfSpeech.name }})
+          <span>{{ definition.definition }}</span>
+          <span>({{ definition.partOfSpeech.name }})</span>
         </li>
       </ul>
       <div class="flex justify-end mt-4">
