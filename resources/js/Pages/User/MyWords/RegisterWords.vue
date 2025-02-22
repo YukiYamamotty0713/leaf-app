@@ -170,9 +170,9 @@ function selectExampleSentence(sentence: string) {
       <label>
         📒例文
       </label>
-      <div class="inline w-[80px] bg-accent text-white rounded-lg p-1 shadow-lg cursor-pointer"
+      <div class="flex justify-center hover:bg-green-600 hover:-translate-y-1 w-[80px] transition-all duration-300 bg-accent text-white rounded-lg p-1 shadow-lg cursor-pointer"
         @click="suggestExampleSentence">
-        Gemi
+        <span>AI抽出</span>
       </div>
       <textarea v-model="form.exampleSentence" placeholder="例文"
         class="rounded-md w-full min-h-[150px] max-h-[200px]">
@@ -184,7 +184,7 @@ function selectExampleSentence(sentence: string) {
             </textarea>
 
       <button class="submit-button" type="button" @click="submit">
-        送信
+        登録
       </button>
     </form>
 
