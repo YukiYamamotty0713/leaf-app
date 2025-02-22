@@ -14,7 +14,10 @@ class MyWordsRepository implements MyWordsRepositoryInterface
      */
     public function get() : Collection | UserWord | null
     {
-        $words = UserWord::with('mPartOfSpeech')->where('user_id', Auth::user()->id)->get();
+        $words = UserWord::with('mPartOfSpeech')
+                 ->where('user_id', Auth::user()->id)
+                 ->where('has_accomplished', false)
+                 ->get();
         return $words;
     }
 
@@ -28,6 +31,29 @@ class MyWordsRepository implements MyWordsRepositoryInterface
         $word = UserWord::find($id);
         return $word;
     }
+
+    public function accomplish(int $id) : void
+    {
+        $word = UserWord::find($id);
+        $word->has_accomplished = true;
+        $word->save();
+    }
+
+    /**
+     * 達成した単語をすべて取得する
+     * @param void
+     * @return Collection<UserWord>
+     * @throws \RuntimeException
+     */
+    public function getAccomplishedWords() : Collection | UserWord | null
+    {
+        $words = UserWord::with('mPartOfSpeech')
+                 ->where('user_id', Auth::user()->id)
+                 ->where('has_accomplished', true)
+                 ->get();
+        return $words;
+    }
+
 
     /**
      * 指定したIDのUserWordを削除する。

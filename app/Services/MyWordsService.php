@@ -23,11 +23,23 @@ class MyWordsService
         return $this->MyWordsRepositoryInterface->get();
     }
 
+    public function accomplish(int $id) :JsonResponse
+    {
+        try {
+            $this->MyWordsRepositoryInterface->accomplish($id);
+            $this->DailyActivityRepositoryInterface->delete();
+            return new JsonResponse(['message' => 'Word accomplished.' . $id], 200);
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'Failed to accomplish word.' . $id], 500);
+        }
+    }
+
+
+
     public function delete(int $id) :JsonResponse
     {
         try {
             $this->MyWordsRepositoryInterface->delete($id);
-            $this->DailyActivityRepositoryInterface->delete();
             return new JsonResponse(['message' => 'Word deleted.' . $id ], 200);
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'Failed to delete word.' . $id], 500);

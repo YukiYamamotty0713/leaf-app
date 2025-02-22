@@ -8,4 +8,5 @@ export const routes: Route[] = [
     { title: "ダッシュボード", route: 'dashboard.index', href:"/dashboard" },
     { title: "単語を登録", route: 'register-words.index', href:"/register-words" },
     { title: "マイ単語帳", route: 'mywords.index', href:"/mywords" },
+    { title:"達成した単語", route: 'accomplished-words.index', href:"/accomplished-words"},
 ];

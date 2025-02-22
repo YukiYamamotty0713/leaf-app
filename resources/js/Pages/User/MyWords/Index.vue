@@ -16,7 +16,7 @@ const props = defineProps<{
 //コピーを作成
 const visible_data = ref<WordData[]>(props.data)
 
-const API_ENDPOINT = '/api/words/';
+const ACCOMPLISH_ENDPOINT = '/api/accomplish/';
 const CSV_FILENAME = 'data.csv';
 
 
@@ -36,7 +36,7 @@ const showToast = (message: string) => {
  */
  const post_delete_word = async (id: number) => {
     try {
-        await axios.delete(`${API_ENDPOINT}${id}`);
+        await axios.post(`${ACCOMPLISH_ENDPOINT}${id}`);
         update_visible_data(id);
         showToast('達成した単語はリストから削除されます。'); // トーストを表示
     } catch (error: any) {

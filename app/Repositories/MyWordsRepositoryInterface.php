@@ -26,6 +26,19 @@ interface MyWordsRepositoryInterface
     public function find(int $id) : ?UserWord;
 
     /**
+     * 指定したIDのUserWordを完了済みにする。
+     * 
+     * @param int $id
+     * @return void
+     */
+    public function accomplish(int $id) : void;
+
+    /**
+     * 
+     */
+    public function getAccomplishedWords() : Collection | UserWord | null;
+
+    /**
      * 指定したIDのUserWordを削除する。
      * 
      * @param int $id

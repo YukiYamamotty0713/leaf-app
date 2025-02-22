@@ -8,7 +8,7 @@ use App\Services\MyWordsService;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 //Authをインストール
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Log;
 /**
  * 自分の単語リストページを返すためのコントローラー
  * index() : 全リストを返す。
@@ -36,8 +36,15 @@ class MyWordsController extends Controller
         ]);
     }
 
+    public function accomplish($id) : JsonResponse
+    {
+        $response = $this->service->accomplish($id);
+        return $response;
+    }
+
     public function delete($id) : JsonResponse
     {
+        Log::debug("delete controller passeed");
         $response = $this->service->delete($id);
         return $response;
     }

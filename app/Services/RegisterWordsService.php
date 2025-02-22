@@ -55,7 +55,6 @@ class RegisterWordsService
         ]);
 
 
-        //DailyActivityRepositoryInterfaceに登録
         $this->DailyActivityRepositoryInterface->register();
         return $posts;
     }
@@ -74,7 +73,6 @@ class RegisterWordsService
 
         //GeminiAPIを利用して例文を提案
         $results = $this->geminiClient->generateText($prompt);
-        Log::debug($results);
 
         //デコードを取り出す
         preg_match('/```json\n(.*)\n```/s', $results, $matches);
