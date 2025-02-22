@@ -33,7 +33,6 @@ class GeminiTest extends TestCase
         try {
             // GeminiClientのgenerateTextメソッドを実行
             $results = $this->geminiClient->generateText($prompt);
-            dd($results);
             // 結果が配列であることをアサート
             $this->assertIsArray($results);
             $this->assertNotEmpty($results);
