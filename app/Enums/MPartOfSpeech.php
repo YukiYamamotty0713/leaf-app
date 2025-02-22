@@ -4,6 +4,7 @@ namespace App\Enums;
 
 enum MPartOfSpeech: int
 {
+    case NotDesignated = null;//指定なし
     case Noun = 1;           // 名詞
     case Verb = 2;           // 動詞
     case Adjective = 3;      // 形容詞

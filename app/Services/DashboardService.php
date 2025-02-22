@@ -35,6 +35,7 @@ class DashboardService
             $sum += $count;  // 合計に加算
         }
         $counts["Sum"] = $sum;
+        dd($counts);
         return $counts;
     }
 

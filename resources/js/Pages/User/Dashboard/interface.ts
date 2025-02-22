@@ -1,4 +1,5 @@
 export interface RegisterWordsCounts  {
+    NotDesignated: number;
     Noun: number;
     Verb: number;
     Adjective: number;

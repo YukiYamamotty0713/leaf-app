@@ -15,6 +15,7 @@ const props = defineProps({
 
 //countsの値をArrayに変換
 const countsArray = [
+    props.counts.NotDesignated,
     props.counts.Noun,
     props.counts.Verb,
     props.counts.Adjective,
@@ -29,6 +30,7 @@ const countsArray = [
 
 // ラベルを作成
 const labels = [
+    "指定なし",
     "名詞",
     "動詞",
     "形容詞",
@@ -44,6 +46,7 @@ const labels = [
 
 // モダン風なデザインのカラー10種類
 const colors = [
+    "#3498DB",  // サクラブルー
     "#4E9F3D",  // 落ち着いた緑
     "#FF6F61",  // コーラルレッド
     "#6A5ACD",  // スレートブルー
