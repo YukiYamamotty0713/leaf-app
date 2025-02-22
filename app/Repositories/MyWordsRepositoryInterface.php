@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\UserWord;
 use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Collection;
 
 interface MyWordsRepositoryInterface
 {
@@ -14,7 +15,7 @@ interface MyWordsRepositoryInterface
      * @return UserWord
      * @throws \RuntimeException
      */
-    public function get();
+    public function get() : Collection | UserWord | null;
 
     /**
      * 指定したIDのUserWordを取得する。

@@ -3,6 +3,7 @@ namespace App\Repositories;
 use App\Repositories\MyWordsRepositoryInterface;
 use Illuminate\Support\Collection;
 use App\Models\UserWord;
+use Illuminate\Support\Facades\Auth;
 class MyWordsRepository implements MyWordsRepositoryInterface
 {
     /**
@@ -11,11 +12,10 @@ class MyWordsRepository implements MyWordsRepositoryInterface
      * @return Collection<UserWord>
      * @throws \RuntimeException
      */
-    public function get() : ?Collection
+    public function get() : Collection | UserWord | null
     {
-            $words = UserWord::with('mPartOfSpeech')->get();
-            return $words;
-
+        $words = UserWord::with('mPartOfSpeech')->where('user_id', Auth::user()->id)->get();
+        return $words;
     }
 
     /**

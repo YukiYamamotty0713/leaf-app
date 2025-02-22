@@ -6,6 +6,8 @@ use Inertia\Inertia;
 use Illuminate\Http\JsonResponse;
 use App\Services\MyWordsService;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+//Authをインストール
+use Illuminate\Support\Facades\Auth;
 
 /**
  * 自分の単語リストページを返すためのコントローラー
@@ -16,7 +18,6 @@ class MyWordsController extends Controller
 {
 
     protected $service;
-
     /**
      * to generate service class
      */

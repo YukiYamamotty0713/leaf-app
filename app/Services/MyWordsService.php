@@ -6,7 +6,6 @@ use Illuminate\Http\JsonResponse;
 use App\Repositories\MyWordsRepositoryInterface;
 use App\Repositories\DailyActivityRepositoryInterface;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-
 class MyWordsService
 {
     protected $MyWordsRepositoryInterface;
