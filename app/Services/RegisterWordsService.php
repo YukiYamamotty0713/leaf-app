@@ -59,6 +59,23 @@ class RegisterWordsService
         return $posts;
     }
 
+
+    /**
+     * ワードの定義を取得する
+     */
+    public function extractDefinitions(Request $request) :array
+    {
+        $prompt = Prompt::extractDefinitionsPrompt($request->word, $this->MPartOfSpeechRepositoryInterface->get());
+        $results = $this->geminiClient->generateText($prompt);
+
+        //デコードを取り出す
+        preg_match('/```json\n(.*)\n```/s', $results, $matches);
+        $arrayString = trim($matches[1]);
+
+        $decodedResult = json_decode($arrayString, true);
+        return $decodedResult;
+    }
+
     /**
      * ワードから例文を提案
      */

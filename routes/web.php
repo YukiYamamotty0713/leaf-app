@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('api/accomplish/{id}', [MyWordsController::class, 'accomplish'])->name('mywords.accomplish');
     Route::delete('api/words/{id}', [MyWordsController::class, 'delete'])->name('mywords.delete');
+    Route::post('api/extract-definitions', [RegisterWordsController::class, 'extractDefinitions'])->name('register-words.extract-definitions');
     Route::post('api/suggest', [RegisterWordsController::class, 'suggest'])->name('register-words.suggest');
 
     Route::get('accomplished-words', [AccomplishedWordsController::class, 'index'])->name('accomplished-words.index');

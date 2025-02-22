@@ -6,19 +6,19 @@ import { WordData, PartOfSpeech } from '@/Types/Interface';
 import axios from 'axios';
 import LoadingOverlay from '@/Molecules/LoadingOverlay.vue';
 import ExampleSentenceModal from '@/Molecules/ExampleSentenceModal.vue';
-
+import DefinitionModal from '@/Molecules/DefintionModal.vue';
 /**
  * フォームの初期値
  */
-const form = useForm<WordData>({
+ const form = useForm<WordData>({
   id: 0,
-  word: '', // 英単語
-  definition: '', // 説明
-  PartOfSpeechId: null, // partOfSpeechId を追加
+  word: '',
+  definition: '',
+  PartOfSpeechId: null, // このプロパティを追加
   PartOfSpeech: {
     id: null,
     name: '選択してください'
-  }, // 品詞
+  },
   exampleSentence: "",
   note: "",
 });
@@ -27,11 +27,17 @@ const form = useForm<WordData>({
 //ローディング状態を管理するref
 const isLoading = ref<boolean>(false);
 
+// 説明候補の配列
+const definitionSuggestions = ref<string[]>([]);
+
 // 例文候補の配列
 const exampleSentenceSuggestions = ref<string[]>([]);
 
 // モーダルの表示状態
-const isModalOpen = ref<boolean>(false);
+const isSuggestDefinitionModalOpen = ref<boolean>(false);
+const isSuggestExampleSenteceModalOpen = ref<boolean>(false);
+
+
 
 /**
  * フォームをリセット
@@ -87,7 +93,7 @@ function showAlert(message: string): void {
  * 例文を提案する
  * @returns void
  */
-async function suggestExampleSentence() {
+async function sugegstExampleSentence() {
   isLoading.value = true;
   exampleSentenceSuggestions.value = []; // Clear previous suggestions
   try {
@@ -103,7 +109,7 @@ async function suggestExampleSentence() {
     } else {
       showAlert('例文の提案に失敗しました: 無効なデータ形式');
     }
-    isModalOpen.value = true; // モーダルを開く
+    isSuggestExampleSenteceModalOpen.value = true; // モーダルを開く
 
   } catch (error) {
     showAlert('例文の提案に失敗しました');
@@ -114,15 +120,61 @@ async function suggestExampleSentence() {
 }
 
 /**
+ * 選択された英単語を基に説明を提案する
+ * @returns void
+ */
+/**
+ * 選択された英単語を基に説明を提案する
+ * @returns void
+ */
+ async function suggestDefinition() {
+ isLoading.value = true;
+ definitionSuggestions.value = []; // Clear previous suggestions
+ try {
+  const response = await axios.post(route('register-words.extract-definitions'), {
+   word: form.word,
+  });
+
+  if (Array.isArray(response.data)) {
+   definitionSuggestions.value = response.data;
+  } else {
+   showAlert('説明の提案に失敗しました: 無効なデータ形式');
+  }
+
+  isSuggestDefinitionModalOpen.value = true; // モーダルを開く
+
+ } catch (error) {
+  showAlert('説明の提案に失敗しました');
+  console.error(error); // 開発者向けのエラーログ
+ } finally {
+  isLoading.value = false;
+ }
+}
+
+/**
  * 選択された例文をフォームに設定する
  * @param sentence 選択された例文
  * @returns void
  */
 function selectExampleSentence(sentence: string) {
   form.exampleSentence = sentence;
-  isModalOpen.value = false; // モーダルを閉じる
+  isSuggestExampleSenteceModalOpen.value = false; // モーダルを閉じる
 }
 
+/**
+ * 選択された説明をフォームに設定する
+ * @param definition 選択された説明
+ * @returns void
+ */
+ function selectDefinition(definition: string, partOfSpeechId: number, partOfSpeechName: string) {
+  form.PartOfSpeechId = partOfSpeechId; // 直接IDを設定
+  form.PartOfSpeech = {  // 表示用のオブジェクトも更新
+    id: partOfSpeechId,
+    name: partOfSpeechName
+  };
+  form.definition = definition;
+  isSuggestDefinitionModalOpen.value = false;
+}
 </script>
 
 <template>
@@ -150,18 +202,25 @@ function selectExampleSentence(sentence: string) {
         {{ form.errors.word }}
       </p>
       <label>📖説明</label>
+      <div class="ai-button"
+      @click="suggestDefinition">
+        <span>AI抽出</span>
+      </div>
       <input v-model="form.definition" type="text" placeholder="単語を入力..." class="rounded-md w-full" />
       <p class="text-red-700">
         {{ form.errors.definition }}
       </p>
       <label>
-        ✏品詞
+        ☕品詞
       </label>
-      <select v-model="form.PartOfSpeech" class="rounded-md w-full">
-        <option v-for="partOfSpeech in data.mPartOfSpeech" :key="partOfSpeech.id" :value="partOfSpeech">
+      <select v-model="form.PartOfSpeechId" class="rounded-md w-full">
+        <option v-for="partOfSpeech in data.mPartOfSpeech" 
+                :key="partOfSpeech.id" 
+                :value="partOfSpeech.id">
           {{ partOfSpeech.name }}
         </option>
       </select>
+
       <p class="text-red-700">
         {{ form.errors.PartOfSpeech }}
       </p>
@@ -169,9 +228,9 @@ function selectExampleSentence(sentence: string) {
       <label>
         📒例文
       </label>
-      <div class="flex justify-center hover:bg-green-600 hover:-translate-y-1 w-[80px] transition-all duration-300 bg-accent text-white rounded-lg p-1 shadow-lg cursor-pointer"
+      <div class="ai-button"
         @click="suggestExampleSentence">
-        <span>AI抽出</span>
+        <span>AI提案</span>
       </div>
       <textarea v-model="form.exampleSentence" placeholder="例文"
         class="rounded-md w-full min-h-[150px] max-h-[200px]">
@@ -187,9 +246,22 @@ function selectExampleSentence(sentence: string) {
       </button>
     </form>
 
+    <!--説明選択モーダル-->
+    <DefinitionModal 
+    :is-open="isSuggestDefinitionModalOpen" 
+    :definitions="definitionSuggestions"
+    @close="isSuggestDefinitionModalOpen = false" 
+    @select="selectDefinition" 
+    />
+
+
     <!-- 例文選択モーダル -->
-    <ExampleSentenceModal :is-open="isModalOpen" :sentences="exampleSentenceSuggestions" @close="isModalOpen = false"
-      @select="selectExampleSentence" />
+    <ExampleSentenceModal 
+    :is-open="isSuggestExampleSenteceModalOpen" 
+    :sentences="exampleSentenceSuggestions" 
+    @close="isSuggestExampleSenteceModalOpen = false"
+    @select="selectExampleSentence" 
+    />
 
   </AuthenticatedLayout>
 </template>
@@ -200,6 +272,10 @@ function selectExampleSentence(sentence: string) {
 
 .register-form {
   @apply py-4 flex flex-col gap-2
+}
+
+.ai-button{
+  @apply flex justify-center hover:bg-green-600 hover:-translate-y-1 w-[80px] transition-all duration-300 bg-accent text-white rounded-lg p-1 shadow-lg cursor-pointer
 }
 
 .submit-button {

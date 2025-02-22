@@ -38,6 +38,16 @@ class RegisterWordsController extends Controller
     }
 
     /**
+     * ワードの定義を取得する
+     */
+    public function extractDefinitions(Request $request)
+    {
+        $response = $this->RegisterWordsService->extractDefinitions($request);
+        return response()->json($response);
+    }
+
+
+    /**
      * GeminiAPIよりワードから例文を提案
      */
     public function suggest(Request $request)
