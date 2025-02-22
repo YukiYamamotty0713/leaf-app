@@ -16,7 +16,7 @@ const pageroute:any = page.props.route;
             📚～苦手な単語を、得意な一枚に～🖊
         </p>
     </div>
-    <div class="flex flex-row justify-center items-center overflow-x-scroll">
+    <div class="flex flex-row justify-center items-center overflow-x-scroll gap-x-3">
         <div v-for="item in routes" class="bg-primary">
             <nav-link 
             :href="route(item.route)"
