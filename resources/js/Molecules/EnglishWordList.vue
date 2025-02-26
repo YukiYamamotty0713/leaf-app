@@ -38,7 +38,7 @@ const toggleDescription = () => {
 
 
   <!-- データ行 -->
-  <div class="flex justify-between items-center border-b-2 hover:bg-slate-100 h-[40px] px-4">
+  <div class="flex justify-between items-center border-b-2 hover:bg-slate-100 h-[40px] px-4 text-slate-800">
     <div class="font-bold text-sm text-left w-6/12">{{ props.data.word }}
       <button 
         @click="speakWord"

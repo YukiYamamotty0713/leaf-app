@@ -1,10 +1,6 @@
 <template>
   <div class="logo-container">
-    <img 
-      :class="computedSize" 
-      src="../../img/application_logo.png" 
-      alt="Logo" 
-    />
+
   </div>
 </template>
 

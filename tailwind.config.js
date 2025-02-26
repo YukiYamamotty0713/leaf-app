@@ -18,20 +18,20 @@ export default {
                 mincho: ['Noto Serif JP', 'serif'],    // 明朝体
             },
             backgroundColor: {
-                primary: '#B69F7E',
-                secondary: '#C0CDDC',
-                accent: '#566A56',
-                light: '#F5F5F5',
-                dark: '#2D2D2D',
-                muted: '#E5E5E5',
+                primary: '#1E415E',     // Pythonロゴの濃い青
+                secondary: '#4B8BBE',   // Pythonロゴの明るい青
+                accent: '#306998',      // Pythonロゴの中間青
+                light: '#EFF8FF',       // 薄い青白色
+                dark: '#172B3A',        // 非常に暗い青
+                muted: '#CFDEE9',       // 淡い青グレー
             },
             textColor: {
-                primary: '#2D2D2D',
-                secondary:'#C0CDDC',
-                accent: '#566A56',
-                light: '#FFFFFF',
-                dark: '#1A1A1A',
-                muted: '#6B6B6B',
+                primary: '#F8F8F2',     // 明るいテキスト（エディタ風）
+                secondary: '#4B8BBE',   // Pythonロゴの明るい青
+                accent: '#72A0C1',      // 水色がかった青
+                light: '#FFFFFF',       // 白
+                dark: '#172B3A',        // 非常に暗い青
+                muted: '#8BA9BF',       // くすんだ青
             },
         },
     },

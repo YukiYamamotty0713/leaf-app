@@ -94,7 +94,7 @@ const toggleShowType = () => {
 <template>
     <authenticated-layout>
         <h2 
-        class="py-4 text-lg bg-white p-2 rounded-lg my-3"
+        class="py-4 text-lg bg-white p-2 rounded-lg my-3 text-black"
         @click="showToast('📖あなたの登録した単語帳が登録されます。覚えた単語は✅をクリックしてください。')"
         >
             📖あなたの登録した単語帳が登録されます。<br>
@@ -131,7 +131,7 @@ const toggleShowType = () => {
             class="my-words-list-wrapper"
             >
               <!-- テーブルヘッダー -->
-                <div class="flex justify-between items-center border-b-2 bg-gray-100 font-bold h-[40px] px-4">
+                <div class="flex justify-between items-center border-b-2 bg-gray-100 font-bold h-[40px] px-4 text-slate-800">
                     <div class="text-sm text-left w-6/12">単語</div>
                     <div class="text-sm text-left w-5/12">説明</div>
                     <div class="text-xs text-right w-1/12">達成</div>

@@ -271,7 +271,7 @@ function selectExampleSentence(sentence: string) {
 }
 
 .register-form {
-  @apply py-4 flex flex-col gap-2
+  @apply py-4 flex flex-col gap-2 text-slate-900
 }
 
 .ai-button{
