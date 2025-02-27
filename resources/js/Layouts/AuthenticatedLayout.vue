@@ -1,37 +1,67 @@
 <script setup lang="ts">
 import Header from '@/Templates/Header.vue';
 import Footer from '@/Templates/Footer.vue';
-import NavLink from '@/Components/NavLink.vue';
-import { routes } from './menus';
-import { usePage } from '@inertiajs/vue3';
+import SidebarMobile from './SidebarMobile.vue';
+import SideBar from './SideBar.vue';
 
-const page = usePage();
-const pageroute:any = page.props.route;
+import { ref, Ref } from 'vue';
+    
+const showSidebarMobile: Ref<boolean> = ref<boolean>(false);
+
+const toggleSidebar = () => {
+    showSidebarMobile.value = !showSidebarMobile.value;
+};
+
 </script>
 
 <template>
-    <Header />
-    <div class="flex justify-center">
-        <p class="text-base　font-bold text-black">
-            📚～苦手な単語を、得意な一枚に～🖊
-        </p>
-    </div>
-    <div class="flex flex-row justify-center items-center gap-x-3">
-        <div v-for="item in routes" class="bg-primary">
-            <nav-link 
-            :href="route(item.route)"
-            class="hover:text-white px-2 py-2 text-sm font-medium"
-            :active="pageroute.name === item.route"
-            >
-                {{ item.title }}
-            </nav-link>
-        </div>
+<div class="flex min-h-screen w-full">
+
+    <div class="sidebar-wrapper md:block hidden">
+        <SideBar/>
     </div>
 
-    <div class="w-full flex justify-center min-h-screen py-6 font-gothic">
-        <main class="max-w-[780px] w-full mx-auto px-[15px]">
+    <div class="container">
+
+        <div class="header-wrapper">
+            <slot name="header">
+            <Header />
+            </slot>
+            <div 
+            class="absolute right-0 mr-4 text-white text-2xl md:hidden block"
+            @click="toggleSidebar"
+            >
+            {{ showSidebarMobile ? '×' : '≡' }}
+            </div>
+        </div>
+
+
+        <main class="main-wrapper">
             <slot />
         </main>
+
+       <!-- SidebarMobile コンポーネントをここに追加 -->
+       <SidebarMobile :show="showSidebarMobile" @close="toggleSidebar" />
     </div>
-    <Footer />
+
+</div>
 </template>
+<style scoped>
+
+.container{
+    @apply flex justify-start items-center min-h-screen gap-y-12 flex-col font-gothic flex-1 min-w-full;
+}
+
+.sidebar-wrapper{
+    @apply w-64 bg-secondary;
+}
+
+.header-wrapper{
+
+    @apply min-w-full bg-black h-[100px] justify-center items-center flex;
+}
+
+.main-wrapper{
+    @apply max-w-[780px] w-full mx-auto px-[15px] relative;
+}
+</style>

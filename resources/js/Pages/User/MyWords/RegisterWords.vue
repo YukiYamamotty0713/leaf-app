@@ -275,11 +275,11 @@ function selectExampleSentence(sentence: string) {
 }
 
 .ai-button{
-  @apply flex justify-center hover:bg-green-600 hover:-translate-y-1 w-[80px] transition-all duration-300 bg-accent text-white rounded-lg p-1 shadow-lg cursor-pointer
+  @apply flex justify-center bg-yellow-300 hover:bg-yellow-600 hover:-translate-y-1 w-[80px] transition-all duration-300 rounded-lg p-1 shadow-lg cursor-pointer
 }
 
 .submit-button {
-  @apply bg-green-300 rounded-md py-3 mt-4
+  @apply bg-gradient-to-r from-yellow-300 to-yellow-400 rounded-md py-3 mt-4
 }
 
 /* アラート用のスタイル */
