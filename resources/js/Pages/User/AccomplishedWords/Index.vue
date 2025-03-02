@@ -42,7 +42,7 @@ const deleteWord = async (id: number) => {
               <p class="text-gray-600">{{ word.definition }}</p>
             </div>
             <div class="flex items-center">
-              <div v-if="word.m_part_of_speech" class="text-sm text-gray-900 mr-4 bg-accent">
+              <div v-if="word.m_part_of_speech" class="text-sm text-gray-900 mr-4">
                 品詞: {{ word.m_part_of_speech.name }}
               </div>
               <button @click="deleteWord(word.id)" class="text-red-500 hover:text-red-700">

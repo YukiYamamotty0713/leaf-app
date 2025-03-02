@@ -271,15 +271,23 @@ function selectExampleSentence(sentence: string) {
 }
 
 .register-form {
-  @apply py-4 flex flex-col gap-2 text-slate-900
+  @apply py-4 flex flex-col gap-2 text-slate-900 text-white
 }
 
-.ai-button{
-  @apply flex justify-center bg-yellow-300 hover:bg-yellow-600 hover:-translate-y-1 w-[80px] transition-all duration-300 rounded-lg p-1 shadow-lg cursor-pointer
+.ai-button {
+  @apply flex justify-center bg-gradient-to-r from-yellow-300 to-amber-400 
+  hover:from-yellow-400 hover:to-amber-500 hover:-translate-y-1 
+  w-[80px] transition-all duration-300 rounded-lg p-1 
+  shadow-md hover:shadow-xl cursor-pointer 
+  border border-yellow-200 text-gray-800 font-medium
 }
 
 .submit-button {
-  @apply bg-gradient-to-r from-yellow-300 to-yellow-400 rounded-md py-3 mt-4
+  @apply bg-gradient-to-r from-yellow-300 to-amber-500 
+  hover:from-yellow-400 hover:to-amber-600
+  rounded-md py-3 mt-4 shadow-lg hover:shadow-xl 
+  transition-all duration-300 hover:-translate-y-0.5
+  border border-yellow-200 text-gray-800 font-semibold
 }
 
 /* アラート用のスタイル */
