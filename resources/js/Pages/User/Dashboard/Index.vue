@@ -27,7 +27,7 @@ console.log(props.registerWordsCounts);
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="ダッシュボード" />
     <AuthenticatedLayout>
         
             <primary-card>
