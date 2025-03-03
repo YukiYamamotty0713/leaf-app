@@ -96,7 +96,7 @@ function doNotSelect() {
 }
 
 .modal-list {
-  @apply space-y-2 mb-4;
+  @apply space-y-2 mb-4 text-black;
 }
 
 .modal-list-item {

@@ -69,7 +69,7 @@ onUnmounted(() => {
         leave-to-class="transform translate-x-full"
       >
         <div
-          class="relative flex flex-col w-full max-w-xs h-full overflow-y-auto bg-secondary shadow-xl"
+          class="relative flex flex-col w-full max-w-xs h-full overflow-y-auto bg-gradient-to-b from-blue-400 via-blue-600 to-blue-900  shadow-xl"
         >
           <div class="absolute top-0 right-0 pt-2 pr-2">
              <button

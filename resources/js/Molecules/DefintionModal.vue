@@ -34,7 +34,7 @@ function selectDefinition(definition: string, partOfSpeechId: number, partOfSpee
 
 <template>
   <div v-if="isOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-    <div class="bg-white rounded-lg p-6 w-full max-w-2xl">
+    <div class="bg-white rounded-lg p-6 w-full max-w-2xl text-black">
       <h2 class="text-lg font-semibold mb-4">最も適切な説明を選択してください</h2>
       <ul class="space-y-2">
         <li v-for="(definition, index) in definitions" :key="index"

@@ -196,12 +196,12 @@ function selectExampleSentence(sentence: string) {
     </transition>
 
     <form class="register-form">
-      <label>🍂英単語</label>
+      <label class="form-label">🍂英単語</label>
       <input v-model="form.word" type="text" placeholder="word" class="rounded-md w-full" />
       <p class="text-red-700">
         {{ form.errors.word }}
       </p>
-      <label>📖説明</label>
+      <label class="form-label">📖説明</label>
       <div class="ai-button"
       @click="suggestDefinition">
         <span>AI抽出</span>
@@ -210,7 +210,7 @@ function selectExampleSentence(sentence: string) {
       <p class="text-red-700">
         {{ form.errors.definition }}
       </p>
-      <label>
+      <label class="form-label">
         ☕品詞
       </label>
       <select v-model="form.PartOfSpeechId" class="rounded-md w-full">
@@ -225,7 +225,7 @@ function selectExampleSentence(sentence: string) {
         {{ form.errors.PartOfSpeech }}
       </p>
 
-      <label>
+      <label class="form-label">
         📒例文
       </label>
       <div class="ai-button"
@@ -236,7 +236,7 @@ function selectExampleSentence(sentence: string) {
         class="rounded-md w-full min-h-[150px] max-h-[200px]">
             </textarea>
 
-      <label>📒備考</label>
+      <label class="form-label">📒備考</label>
       <textarea v-model="form.note" placeholder="備考"
         class="rounded-md w-full min-h-[150px] max-h-[200px]">
             </textarea>
@@ -271,7 +271,7 @@ function selectExampleSentence(sentence: string) {
 }
 
 .register-form {
-  @apply py-4 flex flex-col gap-2 text-slate-900; /* text-white を削除 */
+  @apply py-4 flex flex-col gap-2 text-white; /* text-white を削除 */
 }
 
 .register-form label,
@@ -279,6 +279,10 @@ function selectExampleSentence(sentence: string) {
 .register-form textarea,
 .register-form select {
   @apply text-black; /* 文字色を黒に設定 */
+}
+
+.form-label{
+  @apply text-white;
 }
 
 .ai-button {
