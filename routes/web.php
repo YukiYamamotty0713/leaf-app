@@ -11,7 +11,7 @@ use Inertia\Inertia;
 Route::middleware('auth')->group(function () {
     Route::get('dashboard',[DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('my-words', [MyWordsController::class, 'index'])->name('mywords.index');
-    Route::get('downl oad_csv', [MyWordsController::class, 'download_csv'])->name('my_words.download_csv');
+    Route::get('download_csv', [MyWordsController::class, 'download_csv'])->name('my_words.download_csv');
 
 
 

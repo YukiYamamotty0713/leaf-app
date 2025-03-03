@@ -23,7 +23,6 @@ const props = defineProps({
   }
 });
 
-console.log(props.registerWordsCounts);
 </script>
 
 <template>

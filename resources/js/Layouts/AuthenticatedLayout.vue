@@ -5,63 +5,79 @@ import SidebarMobile from './SidebarMobile.vue';
 import SideBar from './SideBar.vue';
 
 import { ref, Ref } from 'vue';
-    
+
 const showSidebarMobile: Ref<boolean> = ref<boolean>(false);
 
 const toggleSidebar = () => {
     showSidebarMobile.value = !showSidebarMobile.value;
 };
-
 </script>
 
 <template>
-<div class="flex min-h-screen w-full">
+<div class="flex min-h-screen w-full bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white">
 
     <div class="sidebar-wrapper md:block hidden">
-        <SideBar/>
+        <SideBar />
     </div>
 
-    <div class="container">
+    <div class="container relative">
 
         <div class="header-wrapper">
             <slot name="header">
-            <Header />
+                <Header />
             </slot>
             <div 
-            class="absolute right-0 mr-4 text-white text-2xl md:hidden block"
-            @click="toggleSidebar"
+                class="absolute right-4 text-white text-3xl md:hidden block transition-transform duration-300 ease-in-out cursor-pointer"
+                :class="{ 'rotate-90': showSidebarMobile }"
+                @click="toggleSidebar"
             >
-            {{ showSidebarMobile ? '×' : '≡' }}
+                {{ showSidebarMobile ? '×' : '≡' }}
             </div>
         </div>
 
-
-        <main class="main-wrapper">
+        <main class="main-wrapper opacity-0 animate-fadeIn">
             <slot />
         </main>
 
-       <!-- SidebarMobile コンポーネントをここに追加 -->
-       <SidebarMobile :show="showSidebarMobile" @close="toggleSidebar" />
+        <!-- SidebarMobile -->
+        <SidebarMobile 
+            :show="showSidebarMobile" 
+            @close="toggleSidebar" 
+            class="transform transition-transform duration-300"
+            :class="showSidebarMobile ? 'translate-x-0' : 'translate-x-full'"
+        />
     </div>
 
 </div>
 </template>
-<style scoped>
 
-.container{
+<style scoped>
+.container {
     @apply flex justify-start items-center min-h-screen gap-y-12 flex-col font-gothic flex-1 min-w-full;
 }
 
-.sidebar-wrapper{
-    @apply w-64 bg-secondary;
+.sidebar-wrapper {
+    @apply w-64 bg-gradient-to-b from-blue-400 via-blue-600 to-blue-900 shadow-lg;
 }
 
-.header-wrapper{
-
-    @apply min-w-full bg-black h-[100px] justify-center items-center flex;
+.header-wrapper {
+    @apply min-w-full bg-black h-[100px] flex justify-center items-center shadow-lg;
 }
 
-.main-wrapper{
+.main-wrapper {
     @apply max-w-[780px] w-full mx-auto px-[15px] relative;
+}
+
+/* フェードインアニメーション */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.animate-fadeIn {
+    animation: fadeIn 1s ease-out forwards;
 }
 </style>

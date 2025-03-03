@@ -1,102 +1,31 @@
 <script setup>
-import Checkbox from '@/Components/Checkbox.vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
-
-defineProps({
-    canResetPassword: {
-        type: Boolean,
-    },
-    status: {
-        type: String,
-    },
-});
-
-const form = useForm({
-    email: '',
-    password: '',
-    remember: false,
-});
-
-const submit = () => {
-    form.post(route('login'), {
-        onFinish: () => form.reset('password'),
-    });
-};
+import { Head } from '@inertiajs/vue3';
+import StatusMessage from '@/Components/Auth/StatusMessage.vue';
+import LoginHeader from '@/Components/Auth/LoginHeader.vue';
+import LoginForm from '@/Components/Auth/LoginForm.vue';
+import LoginFooter from '@/Components/Auth/LoginFooter.vue';
 </script>
 
 <template>
     <GuestLayout>
         <Head title="Log in" />
 
-        <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
-            {{ status }}
-        </div>
-        <div>
-            <h1 class="text-accent mb-2">
-                🍂The　Leaf　
-            </h1>
-            <p class="text-accent text-sm">
-                ～苦手な英語を、得意な一枚に～
-            </p>
-        </div>
-        <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="email" value="メールアドレス" />
+        <StatusMessage :status="status" />
 
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full text-black"
-                    v-model="form.email"
-                    required
-                    autofocus
-                    autocomplete="username"
-                />
+        <LoginHeader />
 
-                <InputError class="mt-2" :message="form.errors.email" />
-            </div>
+        <LoginForm :can-reset-password="canResetPassword" />
 
-            <div class="mt-4">
-                <InputLabel for="password" value="パスワード" />
-
-                <TextInput
-                    id="password"
-                    type="password"
-                    class="mt-1 block w-full text-black"
-                    v-model="form.password"
-                    required
-                    autocomplete="current-password"
-                />
-
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
-
-            <div class="mt-4 flex items-center justify-between">
-                <Link
-                    id="register"
-                    href="/register"
-                    class="bg-accent text-white p-2 rounded-lg shadow-lg text-sm"
-                >
-                    新規登録
-                </Link>
-
-
-                <PrimaryButton
-                    id="login"
-                    :class="{ 'opacity-25': form.processing }"
-                    :disabled="form.processing"
-                >
-                    ログイン
-                
-                </PrimaryButton>
-
-
-            </div>
-        </form>
+        <LoginFooter />
     </GuestLayout>
 </template>
+
+<style scoped>
+/* 必要に応じてカスタムスタイルを追加 */
+/* accentカラーの定義（実際の使用に合わせて調整してください） */
+:root {
+  --color-accent: #4f46e5;
+  --color-accent-dark: #4338ca;
+}
+</style>

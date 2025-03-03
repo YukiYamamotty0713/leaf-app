@@ -7,7 +7,7 @@ const pageroute:any = page.props.route;
 
 </script>
 <template>
-<div class="flex flex-col items-center justify-between py-12 gap-y-4 w-64 bg-secondary border-l-4 border-l-black">
+<div class="flex flex-col items-center justify-between py-12 gap-y-4 w-64 border-l-4 border-l-black">
     <div 
     v-for="item in routes" 
     :key="item.route"

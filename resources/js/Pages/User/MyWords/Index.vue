@@ -77,7 +77,6 @@ function update_visible_data(id:number){
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
 
-        console.log('ダウンロードしました');
     } catch (error) {
         console.error("ダウンロードに失敗しました");
         console.error(error);
