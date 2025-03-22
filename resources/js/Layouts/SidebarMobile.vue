@@ -3,7 +3,8 @@ import { usePage } from '@inertiajs/vue3';
 import { routes } from './menus';  // menus.ts の場所は適宜調整してください
 import NavLink from '@/Components/NavLink.vue';
 import { ref, onMounted, onUnmounted } from 'vue';
-
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"; // FontAwesomeIcon をインポート
+import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons'; // ログアウトアイコンをインポート
 
 const props = defineProps<{
     show: boolean;
@@ -44,7 +45,7 @@ onUnmounted(() => {
     leave-from-class="opacity-100"
     leave-to-class="transform opacity-0"
   >
-    <div v-if="show" class="fixed inset-0 z-40 flex">
+    <div v-if="show" class="fixed inset-0 z-50 flex ">
       <Transition
         enter-active-class="transition duration-200 ease-out"
         enter-from-class="opacity-0"
@@ -57,7 +58,7 @@ onUnmounted(() => {
           class="fixed inset-0 bg-black bg-opacity-50"
           aria-hidden="true"
           @click="close"
-        ></div>
+        >×</div>
       </Transition>
 
       <Transition
@@ -69,7 +70,7 @@ onUnmounted(() => {
         leave-to-class="transform translate-x-full"
       >
         <div
-          class="relative flex flex-col w-full max-w-xs h-full overflow-y-auto bg-gradient-to-b from-blue-400 via-blue-600 to-blue-900  shadow-xl"
+          class="relative flex flex-col w-full max-w-xs h-full overflow-y-auto bg-blue-900 shadow-xl"
         >
           <div class="absolute top-0 right-0 pt-2 pr-2">
              <button
@@ -102,8 +103,10 @@ onUnmounted(() => {
                     :key="item.route"
                     class="flex justify-start w-full pl-6"
                 >
+                <font-awesome-icon :icon="item.icon" class="w-5 h-5 text-gray-300" />
+
                     <nav-link
-                        :href="route(item.route)"
+                        :href="item.route"
                         class="hover:text-white px-2 py-2 text-lg font-medium"
                         :active="pageroute.name === item.route"
                     >

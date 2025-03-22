@@ -9,8 +9,6 @@ const hoveredItem = ref<string | null>(null);
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
-console.log(pageroute);
-console.log(routes);
 </script>
 
 <template>

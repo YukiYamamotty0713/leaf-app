@@ -46,8 +46,6 @@ const sidebarIcon = computed(() => showSidebarMobile.value ? '×' : '≡');
         <SidebarMobile 
             :show="showSidebarMobile" 
             @close="toggleSidebar" 
-            class="transform transition-transform duration-300"
-            :class="showSidebarMobile ? 'translate-x-0' : 'translate-x-full'"
         />
     </div>
 
