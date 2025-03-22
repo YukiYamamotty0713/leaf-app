@@ -13,8 +13,6 @@ Route::middleware('auth')->group(function () {
     Route::get('my-words', [MyWordsController::class, 'index'])->name('mywords.index');
     Route::get('download_csv', [MyWordsController::class, 'download_csv'])->name('my_words.download_csv');
 
-
-
     Route::get('words-question', [WordsQuestionController::class, 'index'])->name('words-question.index'); 
     Route::get('register-words', [RegisterWordsController::class, 'index'])->name('register-words.index');
     Route::post('register-words', [RegisterWordsController::class, 'store'])->name('register-words.store');
@@ -25,7 +23,6 @@ Route::middleware('auth')->group(function () {
     Route::post('api/suggest', [RegisterWordsController::class, 'suggest'])->name('register-words.suggest');
 
     Route::get('accomplished-words', [AccomplishedWordsController::class, 'index'])->name('accomplished-words.index');
-
 });
 
 require __DIR__.'/auth.php';

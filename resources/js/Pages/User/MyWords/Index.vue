@@ -5,7 +5,6 @@ import EnglishWordCard from '@/Molecules/EnglishWordCard.vue';
 import EnglishWordList from '@/Molecules/EnglishWordList.vue';
 import axios from 'axios';
 import CSVDownload from '@/Icons/CSVDownload.vue';
-import { MyWord } from './interface.ts';
 import ShowTypeToggleButton from '@/Atoms/ShowTypeToggleButton.vue';
 import { WordData } from '@/Types/Interface';
 
@@ -15,6 +14,9 @@ const props = defineProps<{
 
 //コピーを作成
 const visible_data = ref<WordData[]>(props.data)
+
+//データが１つでもあるかどうか
+const hasAtLeastOneData = computed(() => visible_data.value.length > 0);
 
 const ACCOMPLISH_ENDPOINT = '/api/accomplish/';
 const CSV_FILENAME = 'data.csv';
@@ -102,6 +104,7 @@ const toggleShowType = () => {
             <p class="text-red-700">
                 {{ delete_result }}
             </p>
+        <div v-if="hasAtLeastOneData">
 
         <div class="flex justify-between">
             <show-type-toggle-button 
@@ -110,10 +113,11 @@ const toggleShowType = () => {
             <CSVDownload 
               @click="download_csv"/>
         </div>
-            <div 
-            v-if="showType === 'card'"
-            class="my-words-wrapper">
-                <transition-group 
+        <div 
+        v-if="showType === 'card'"
+        class="my-words-wrapper"
+        >
+            <transition-group 
                 name="fade">
                     <div
                     v-for="item in visible_data"
@@ -125,24 +129,36 @@ const toggleShowType = () => {
                     </div>
                 </transition-group>
             </div>
-            <div
-            v-else-if="showType === 'list'"
-            class="my-words-list-wrapper"
-            >
-              <!-- テーブルヘッダー -->
-                <div class="flex justify-between items-center border-b-2 bg-gray-100 font-bold h-[40px] px-4 text-slate-800">
-                    <div class="text-sm text-left w-6/12">単語</div>
-                    <div class="text-sm text-left w-5/12">説明</div>
-                    <div class="text-xs text-right w-1/12">達成</div>
-                </div>
-                <div
-                v-for="item in visible_data"
-                :key="item.id"> 
-                    <english-word-list 
-                        :data="item"
-                        @delete="post_delete_word"/>
-                </div>    
+        <div
+        v-else-if="showType === 'list'"
+        class="my-words-list-wrapper"
+        >
+        <!-- テーブルヘッダー -->
+            <div class="flex justify-between items-center border-b-2 bg-gray-100 font-bold h-[40px] px-4 text-slate-800">
+                <div class="text-sm text-left w-6/12">単語</div>
+                <div class="text-sm text-left w-5/12">説明</div>
+                <div class="text-xs text-right w-1/12">達成</div>
             </div>
+            <div
+            v-for="item in visible_data"
+            :key="item.id"> 
+                <english-word-list 
+                    :data="item"
+                    @delete="post_delete_word"/>
+            </div>    
+        </div>
+    </div>
+    <div v-else class="p-6 bg-white text-black rounded-md my-3 shadow-lg font-bold mt-6">
+        <p class="text-center">まだ単語が登録されていません。</p>
+        <p class="text-center">単語を登録して、あなただけの一枚を作成しよう！</p>
+        <div class="flex justify-end">
+        <a 
+            class="text-right text-blue-300 hover:text-blue-500 cursor-pointer mt-6"
+            :href="route('register-words.index')">
+                    単語を登録する
+        </a>
+    </div>  
+    </div>
     </authenticated-layout>
 
     <!-- トーストメッセージ -->

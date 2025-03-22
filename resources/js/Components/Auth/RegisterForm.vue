@@ -130,7 +130,7 @@ const submit = () => {
         <div class="text-center pt-2">
             <Link
                 :href="route('login')"
-                class="text-sm text-blue-300 hover:text-white font-medium transition duration-200"
+                class="text-sm font-medium transition duration-200 text-blue-500 hover:text-blue-600 hover:underline"
             >
                 既に登録済みですか？ログイン
             </Link>

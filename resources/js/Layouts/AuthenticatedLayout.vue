@@ -4,13 +4,16 @@ import Footer from '@/Templates/Footer.vue';
 import SidebarMobile from './SidebarMobile.vue';
 import SideBar from './SideBar.vue';
 
-import { ref, Ref } from 'vue';
+import { computed, ref, Ref } from 'vue';
 
 const showSidebarMobile: Ref<boolean> = ref<boolean>(false);
 
 const toggleSidebar = () => {
     showSidebarMobile.value = !showSidebarMobile.value;
 };
+
+const sidebarIcon = computed(() => showSidebarMobile.value ? '×' : '≡');
+
 </script>
 
 <template>
@@ -31,7 +34,7 @@ const toggleSidebar = () => {
                 :class="{ 'rotate-90': showSidebarMobile }"
                 @click="toggleSidebar"
             >
-                {{ showSidebarMobile ? '×' : '≡' }}
+                {{ sidebarIcon }}
             </div>
         </div>
 
@@ -57,7 +60,7 @@ const toggleSidebar = () => {
 }
 
 .sidebar-wrapper {
-    @apply w-64 bg-gradient-to-b from-blue-400 via-blue-600 to-blue-900 shadow-lg;
+    @apply w-64 bg-blue-900;
 }
 
 .header-wrapper {

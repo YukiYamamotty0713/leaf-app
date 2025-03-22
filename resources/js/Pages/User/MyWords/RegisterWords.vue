@@ -274,15 +274,10 @@ function selectExampleSentence(sentence: string) {
   @apply py-4 flex flex-col gap-2 text-white; /* text-white を削除 */
 }
 
-.register-form label,
-.register-form input,
-.register-form textarea,
-.register-form select {
-  @apply text-black; /* 文字色を黒に設定 */
-}
+
 
 .form-label{
-  @apply text-white;
+  @apply text-white  text-lg;
 }
 
 .ai-button {

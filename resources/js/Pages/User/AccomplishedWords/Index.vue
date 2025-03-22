@@ -30,6 +30,10 @@ const deleteWord = async (id: number) => {
   <AuthenticatedLayout>
     <div class="p-6">
       <h2 class="text-2xl font-semibold mb-4">既に覚えた単語リスト</h2>
+      <div v-if="words.length === 0" class="text-slate-200 text-lg">
+        まだ単語を登録していません。
+      </div>
+      <div v-else>
       <ul class="space-y-2">
         <li
           v-for="word in words"
@@ -52,6 +56,7 @@ const deleteWord = async (id: number) => {
           </div>
         </li>
       </ul>
+    </div>
     </div>
   </AuthenticatedLayout>
 </template>

@@ -10,20 +10,14 @@ import LoginFooter from '@/Components/Auth/LoginFooter.vue';
 <template>
     <GuestLayout>
         <Head title="Log in" />
-
-        <StatusMessage :status="status" />
-
+        <StatusMessage :status="status"/>
         <LoginHeader />
-
         <LoginForm :can-reset-password="canResetPassword" />
-
         <LoginFooter />
     </GuestLayout>
 </template>
 
 <style scoped>
-/* 必要に応じてカスタムスタイルを追加 */
-/* accentカラーの定義（実際の使用に合わせて調整してください） */
 :root {
   --color-accent: #4f46e5;
   --color-accent-dark: #4338ca;

@@ -38,7 +38,7 @@ const togglePasswordVisibility = () => {
 </script>
 
 <template>
-    <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 mb-6">
+    <div class=" p-6 mb-6">
         <form @submit.prevent="submit">
             <!-- メールアドレス入力 -->
             <div class="mb-6">
