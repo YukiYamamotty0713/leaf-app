@@ -2,10 +2,10 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { defineProps, ref } from 'vue';
 import axios from 'axios';
-
+import { MyWord } from '@/Types/Interface';
 // 型定義を適用
 const props = defineProps<{
-  words: Word[];
+  words: MyWord[];
 }>();
 
 const words = ref(props.words);

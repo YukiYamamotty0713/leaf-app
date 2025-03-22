@@ -4,7 +4,6 @@ import { routes } from './menus';  // menus.ts の場所は適宜調整してく
 import NavLink from '@/Components/NavLink.vue';
 import { ref, onMounted, onUnmounted } from 'vue';
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"; // FontAwesomeIcon をインポート
-import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons'; // ログアウトアイコンをインポート
 
 const props = defineProps<{
     show: boolean;
