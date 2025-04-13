@@ -31,6 +31,10 @@ Github Actionsを使用(workflow/ci.yml)
 - **Service：** ビジネスロジックを担当  
 - **Controller：** 入力の受け取りとエラーハンドリングを担当
 
+#### アダプターパターン
+- **Adapter:** 外部APIとの接続の際は、Adapterにラップ
+ex) gemini
+
 #### 🧱 フロントエンド：Atomic Design
 
 | レイヤー     | 説明                                                                 |
@@ -40,3 +44,9 @@ Github Actionsを使用(workflow/ci.yml)
 | **Organism** | ページ構成単位の複合パーツ（登録フォーム、モーダルの中身など）      |
 | **Template** | レイアウトテンプレート（印刷対応や複雑なレスポンシブ構造時）         |
 |
+
+
+### 📄 ドキュメントリンク
+
+- [要件定義](../docs/要件定義.md)
+- [テーブル定義](../docs/テーブル定義.md)
