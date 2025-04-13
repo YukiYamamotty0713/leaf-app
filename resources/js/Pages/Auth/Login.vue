@@ -5,6 +5,12 @@ import StatusMessage from '@/Components/Auth/StatusMessage.vue';
 import LoginHeader from '@/Components/Auth/LoginHeader.vue';
 import LoginForm from '@/Components/Auth/LoginForm.vue';
 import LoginFooter from '@/Components/Auth/LoginFooter.vue';
+
+const props = defineProps({
+    status: String,
+    canResetPassword: Boolean,
+});
+
 </script>
 
 <template>

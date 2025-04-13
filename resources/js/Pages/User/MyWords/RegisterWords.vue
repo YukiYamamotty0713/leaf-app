@@ -197,7 +197,7 @@ function selectExampleSentence(sentence: string) {
 
     <form class="register-form">
       <label class="form-label">🍂英単語</label>
-      <input v-model="form.word" type="text" placeholder="word" class="rounded-md w-full" />
+      <input v-model="form.word" type="text" placeholder="word" class="rounded-md w-full text-slate-900" />
       <p class="text-red-700">
         {{ form.errors.word }}
       </p>
@@ -206,14 +206,14 @@ function selectExampleSentence(sentence: string) {
       @click="suggestDefinition">
         <span>AI抽出</span>
       </div>
-      <input v-model="form.definition" type="text" placeholder="単語を入力..." class="rounded-md w-full" />
+      <input v-model="form.definition" type="text" placeholder="単語を入力..." class="rounded-md w-full text-slate-900" />
       <p class="text-red-700">
         {{ form.errors.definition }}
       </p>
       <label class="form-label">
         ☕品詞
       </label>
-      <select v-model="form.PartOfSpeechId" class="rounded-md w-full">
+      <select v-model="form.PartOfSpeechId" class="rounded-md w-full text-slate-900">
         <option v-for="partOfSpeech in data.mPartOfSpeech" 
                 :key="partOfSpeech.id" 
                 :value="partOfSpeech.id">
@@ -233,12 +233,12 @@ function selectExampleSentence(sentence: string) {
         <span>AI提案</span>
       </div>
       <textarea v-model="form.exampleSentence" placeholder="例文"
-        class="rounded-md w-full min-h-[150px] max-h-[200px]">
+        class="rounded-md w-full min-h-[150px] max-h-[200px] text-slate-900">
             </textarea>
 
       <label class="form-label">📒備考</label>
       <textarea v-model="form.note" placeholder="備考"
-        class="rounded-md w-full min-h-[150px] max-h-[200px]">
+        class="rounded-md w-full min-h-[150px] max-h-[200px] text-slate-900">
             </textarea>
 
       <button class="submit-button" type="button" @click="submit">
