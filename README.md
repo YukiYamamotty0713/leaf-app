@@ -2,6 +2,17 @@
 英単語学習アプリ「Leaf」のアプリケーションリポジトリです。  
 効率的かつ効果的な英単語学習をサポートします。
 
+### 📷 アプリケーションのスクリーンショット
+
+以下はアプリケーションのスクリーンショットです：
+
+![ログイン画面](docs/img/login.png)
+![ダッシュボード画面](docs/img/dashboard.png)  
+![カードによる暗記機能](docs/img/card.png)  
+![生成AIによる日本語登録のアシスト機能](docs/img/dashboard.png)
+![生成AIによる例文登録のアシスト機能](docs/img/suggest2.png)
+![登録した単語のリスト](docs/img/accomplished.png)
+![登録した単語の音声発音機能](docs/img/voice.png)
 
 ### 使用している技術
 - **バックエンド：** Laravel  
