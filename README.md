@@ -78,7 +78,7 @@ Github Actionsを使用(workflow/ci.yml)
 
 #### アダプターパターン
 - **Adapter:** 外部APIとの接続の際は、Adapterにラップ
-ex) gemini
+ex)gemini
 
 #### 🧱 フロントエンド：Atomic Design
 
