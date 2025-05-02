@@ -8,10 +8,8 @@ use Tests\TestCase;
 
 /**
  * Class MakeServiceControllerTest
- * 
  * 'make:service-controller' Artisanコマンドのテストクラスです。
  * このテストは、サービスコントローラーが期待通りに作成されるかを確認します。
- *
  * @package Tests\Feature
  */
 class MakeServiceControllerTest extends TestCase
@@ -71,12 +69,10 @@ class MakeServiceControllerTest extends TestCase
      */
     public function test_controller_returns_error_if_already_exists()
     {
-        // 中身が空のコントローラーファイルを作成して、入力されたコントローラーが既にある状態をシミュレート
         File::put($this->controllerPath, ''); 
         $result = Artisan::call('make:service-controller', [
             'name' => $this->controllerName,
         ]);
-        \Log::debug($result);
         $this->assertNotEquals(0, $result);
     }
 }

@@ -18,6 +18,10 @@ class WeeklyActivityDTO
      */
     public array $activities;
 
+    /**
+     * @param array $days 日付の配列（Y-m-d形式）
+     * @param array $activities アクティビティデータの配列
+     */
     public function __construct(array $days, array $activities)
     {
         $this->validateDays($days);

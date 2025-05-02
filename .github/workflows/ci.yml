@@ -26,7 +26,19 @@ jobs:
       - name: Install dependencies
         run: |
           composer install --no-progress --prefer-dist
+          npm install
+          
+      # 3. ビルドの実行
+      - name: Build
+        run: |
+          npm run build
 
+     # 4. Unittestの実行
+      - name: Run tests
+        run: |
+          php artisan test 
+          npm test
+ 
   deploy:
             needs: build
             runs-on: ubuntu-latest

@@ -2,8 +2,11 @@
 
 namespace App\Services;
 
+use App\Models\User;
 use App\Repositories\MyWordsRepositoryInterface;
 use Illuminate\Support\Facades\Log;
+use App\Models\UserWord;
+
 class AccomplishedWordsService
 {
     protected $MyWordsRepositoryInterface;
@@ -13,9 +16,8 @@ class AccomplishedWordsService
         $this->MyWordsRepositoryInterface = $MyWordsRepositoryInterface;
     }
 
-    public function get()
+    public function get():UserWord | null
     {
-        Log::debug($this->MyWordsRepositoryInterface->getAccomplishedWords());
-        return $this->MyWordsRepositoryInterface->getAccomplishedWords();
+        return $this->MyWordsRepositoryInterface->get();
     }
 }
