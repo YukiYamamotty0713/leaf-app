@@ -64,7 +64,7 @@
 ### CI/CDパイプライン
 Github Actionsを使用(workflow/ci.yml)
 トリガー: mainブランチに対するpush、もしくはmainブランチに対するpull request
-ビルドが通過すれば、herokuへプッシュ
+ビルド、およびPHP単体テスト、Jestが通過すれば、herokuへプッシュ
 
 ---
 
