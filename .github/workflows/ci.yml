@@ -33,7 +33,7 @@ jobs:
         run: |
           npm run build
 
-     # 4. Unittestの実行
+     # 4. testの実行
       - name: Run tests
         run: |
           php artisan test 
