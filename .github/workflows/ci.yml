@@ -40,6 +40,7 @@ jobs:
           npm test
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          APP_KEY: ${{ secrets.APP_KEY }}
  
   deploy:
             needs: build
