@@ -41,7 +41,6 @@ class WeeklyActivityDTOTest extends TestCase
     public function test_successful_instantiation()
     {
         $dto = new WeeklyActivityDTO($this->validDays(), $this->validActivities());
-        dd($dto);
         $this->assertCount(7, $dto->days);
         $this->assertCount(7, $dto->activities);
     }
