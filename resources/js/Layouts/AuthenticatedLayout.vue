@@ -3,16 +3,10 @@ import Header from '@/Templates/Header.vue';
 import Footer from '@/Templates/Footer.vue';
 import SidebarMobile from './SidebarMobile.vue';
 import SideBar from './SideBar.vue';
+import { useSidebar } from '@/Composables/Layout/AuthenticatedLayout/useSidebar';
 
-import { computed, ref, Ref } from 'vue';
+const { showSidebarMobile, toggleSidebar, sidebarIcon } = useSidebar();
 
-const showSidebarMobile: Ref<boolean> = ref<boolean>(false);
-
-const toggleSidebar = () => {
-    showSidebarMobile.value = !showSidebarMobile.value;
-};
-
-const sidebarIcon = computed(() => showSidebarMobile.value ? '×' : '≡');
 
 </script>
 
