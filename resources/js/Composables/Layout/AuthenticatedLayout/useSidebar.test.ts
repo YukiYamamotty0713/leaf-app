@@ -1,6 +1,5 @@
-import { useSidebar } from '@/Composables/Layout/AuthenticatedLayout/useSidebar';
+import { useSidebar } from './useSidebar';
 import { describe, it, expect } from '@jest/globals';
-import { ref } from 'vue';
 
 describe('useSidebar', () => {
   it('初期値がfalseの場合、showSidebarMobileはfalseで、sidebarIconは≡であること', () => {
