@@ -3,10 +3,10 @@ name: PHP CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # mainブランチへのpushをトリガー
+      - main  # mainブランチへのpush
   pull_request:
     branches:
-      - main  # mainブランチへのPRをトリガー
+      - main  # mainブランチへのPR
 
 jobs:
   build:
