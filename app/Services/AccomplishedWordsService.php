@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Repositories\MyWordsRepositoryInterface;
 use Illuminate\Support\Facades\Log;
 use App\Models\UserWord;
-
+use Illuminate\Support\Collection;
 class AccomplishedWordsService
 {
     protected $MyWordsRepositoryInterface;
@@ -16,7 +16,7 @@ class AccomplishedWordsService
         $this->MyWordsRepositoryInterface = $MyWordsRepositoryInterface;
     }
 
-    public function get():UserWord | null
+    public function get(): Collection | UserWord | null
     {
         return $this->MyWordsRepositoryInterface->get();
     }
