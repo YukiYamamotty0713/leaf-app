@@ -38,5 +38,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Vite::prefetch(concurrency: 3);
+                // Heroku環境など、リバースプロキシ配下でhttpsでアクセスされている場合
+        if (config('app.env') === 'production' || config('app.env') === 'staging') {
+            URL::forceScheme('https');
+        }
     }
 };
